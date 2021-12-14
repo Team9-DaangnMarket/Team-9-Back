@@ -1,12 +1,23 @@
 package com.sparta.team9back.validator;
 
 import com.sparta.team9back.dto.User.SignupRequestDto;
-import lombok.NoArgsConstructor;
+import com.sparta.team9back.model.User;
+import com.sparta.team9back.security.UserDetailsImpl;
+
 
 import java.util.regex.Pattern;
 
 public class UserInfoValidator {
+    public static User userDetailsIsNull(UserDetailsImpl userDetails){
+        if(userDetails != null){
+            return userDetails.getUser();
+        }else{
+            throw new NullPointerException("유효하지 않은 사용자입니다.");
+        }
+    }
     public static void validateUserInfoInput(SignupRequestDto requestDto) {
+
+
         String patternUsername = "^[a-zA-Z0-9]{3,20}$";
         String patternNickname = "^[a-zA-Z0-9]{3,10}$";
         String patternPassword = "^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$";
