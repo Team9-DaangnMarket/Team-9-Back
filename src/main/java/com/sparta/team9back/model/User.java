@@ -28,6 +28,8 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
+    @Column
+    private String profileImg;
 
     public User(SignupRequestDto requestDto, String enPassword){
         UserInfoValidator.validateUserInfoInput(requestDto);
@@ -40,7 +42,6 @@ public class User {
         this.username = userId;
         this.nickname = nickname;
         this.password = encodedPassword;
-
     }
 
 //    public void  update(SignupRequestDto requestDto) {
