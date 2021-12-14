@@ -18,12 +18,13 @@ public class UserService {
 
     public void registerUser(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
-        String profileImg;
+
+        String profileImg = requestDto.getProfileImg();
 
         if(requestDto.getProfileImg() == null)
             profileImg = "default.img";
         else
-            profileImg = "requestDto.getProfileImg()";
+            profileImg = requestDto.getProfileImg();
 
         if(userRepository.existsByUsername(username)){
             throw new IllegalArgumentException("중복된 아이디 입니다.");
