@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class PostInsideDto {
+    private Long postId;
     private String title;
     private int price;
     private String goodsImg;
