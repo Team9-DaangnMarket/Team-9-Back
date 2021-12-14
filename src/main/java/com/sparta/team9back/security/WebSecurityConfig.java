@@ -129,6 +129,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         skipPathList.add("GET,/");
         skipPathList.add("GET,/search");
 
+        // Swagger
+        skipPathList.add("GET, /swagger-ui.html");
+        skipPathList.add("GET, /swagger/**");
+        skipPathList.add("GET, /swagger-resources/**");
+        skipPathList.add("GET, /webjars/**");
+        skipPathList.add("GET, /v2/api-docs");
 
         skipPathList.add("GET,/favicon.ico");
 
@@ -156,7 +162,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("http://localhost:3000"); // local 테스트 시
-//        configuration.addAllowedOrigin("http://hanghae99-sout.s3-website.ap-northeast-2.amazonaws.com"); // 배포 시
+        configuration.addAllowedOrigin("http://hanghae99-sout.s3-website.ap-northeast-2.amazonaws.com"); // 배포 시
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.addExposedHeader("Authorization");
@@ -166,3 +172,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 }
+

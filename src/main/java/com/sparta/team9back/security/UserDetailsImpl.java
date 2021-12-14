@@ -12,7 +12,7 @@ import java.util.Collections;
 public class UserDetailsImpl implements UserDetails {
     private final User user;
 
-    public com.sparta.team9back.model.User getUser() {
+    public User getUser() {
         return user;
     }
 

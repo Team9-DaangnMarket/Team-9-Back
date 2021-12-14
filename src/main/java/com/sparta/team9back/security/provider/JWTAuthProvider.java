@@ -23,7 +23,9 @@ public class JWTAuthProvider implements AuthenticationProvider {
     // JWT 토큰 유효성 검사
     @Override
     public Authentication authenticate(Authentication authentication)
+
             throws AuthenticationException {
+        System.out.println("유효성검사는 할거지?");
         String token = (String) authentication.getPrincipal();
         String username = jwtDecoder.decodeUsername(token);
 

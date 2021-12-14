@@ -17,10 +17,10 @@ public class UserService {
 
 
     public void registerUser(SignupRequestDto requestDto) {
-        String userId = requestDto.getUsername();
+        String username = requestDto.getUsername();
 
 
-        if(userRepository.existsByUsername(userId)){
+        if(userRepository.existsByUsername(username)){
             throw new IllegalArgumentException("중복된 아이디 입니다.");
         }
 
@@ -30,8 +30,8 @@ public class UserService {
         System.out.println("저장됨? >.<");
 
         // 유저 생성
-        User user = new User(userId, enPassword, requestDto.getNickname());
-        userRepository.save(user);
+        User user = new User(requestDto, enPassword);
+        userRepository.save(user); // DB 저장
     }
 
 

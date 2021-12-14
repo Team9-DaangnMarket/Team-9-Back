@@ -24,6 +24,7 @@ public class JwtTokenUtils {
 
     public static String generateJwtToken(UserDetailsImpl userDetails) {
         String token = null;
+        System.out.println("토큰생성하러가니?");
         try {
             token = JWT.create()
                     .withIssuer("sparta")

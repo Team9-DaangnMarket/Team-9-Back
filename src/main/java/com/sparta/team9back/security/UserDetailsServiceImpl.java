@@ -2,7 +2,6 @@ package com.sparta.team9back.security;
 
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.UserRepository;
-import com.sparta.team9back.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

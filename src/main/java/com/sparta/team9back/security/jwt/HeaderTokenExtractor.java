@@ -29,7 +29,9 @@ public class HeaderTokenExtractor {
          * - Token 값이 존재하는 경우 -
          * (bearer ) 부분만 제거 후 token 값 반환
          */
+        System.out.println("이것도 안돼?");
         return header.substring(
+
                 HEADER_PREFIX.length(),
                 header.length()
         );
