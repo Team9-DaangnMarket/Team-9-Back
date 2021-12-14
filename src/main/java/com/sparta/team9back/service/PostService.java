@@ -7,7 +7,6 @@ import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.PostRepository;
-import com.sparta.team9back.repository.UserRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,6 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
 
     @Transactional // 이걸 잊지 않았나 하는 생각.
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
@@ -62,6 +60,7 @@ public class PostService {
         }
 
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(user);
+        // 이 부분에서 내가 헤맸음.
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
 

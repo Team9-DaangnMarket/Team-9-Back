@@ -16,7 +16,7 @@ import java.util.List;
 public class MyDetailService {
     private final RecommendRepository recommendRepository;
 
-    public  MyDetailResponseDto getRecommend(UserDetailsImpl userDetails) {
+    public MyDetailResponseDto getRecommend(UserDetailsImpl userDetails) {
         User user = UserInfoValidator.userDetailsIsNull(userDetails);
 
         List<Recommend> recommendList = recommendRepository.findAllByUser(user);
