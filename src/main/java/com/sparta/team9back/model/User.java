@@ -28,18 +28,23 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
-    @Column
+    @Column(columnDefinition = "varchar(255) default 'default.img'")
     private String profileImg;
 
-    public User(SignupRequestDto requestDto, String enPassword){
+    public User(SignupRequestDto requestDto, String enPassword){        //이렇게 해도 되나?
         UserInfoValidator.validateUserInfoInput(requestDto);
         this.username = requestDto.getUsername();
         this.nickname = requestDto.getNickname();
         this.password = enPassword;
+        if(requestDto.getProfileImg() == null){
+            this.profileImg = "default.img";
+        }
+        else
+            this.profileImg = requestDto.getProfileImg();
     }
 
-    public User(String nickname, String encodedPassword, String userId) {
-        this.username = userId;
+    public User(String nickname, String encodedPassword, String username) {
+        this.username = username;
         this.nickname = nickname;
         this.password = encodedPassword;
     }
