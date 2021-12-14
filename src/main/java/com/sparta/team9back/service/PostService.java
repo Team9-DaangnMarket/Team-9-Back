@@ -1,5 +1,7 @@
 package com.sparta.team9back.service;
 
+import com.sparta.team9back.dto.PostDetailDto;
+import com.sparta.team9back.dto.PostInsideDto;
 import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.model.Post;
@@ -8,6 +10,11 @@ import com.sparta.team9back.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +34,7 @@ public class PostService {
                 .category(postRequestDto.getCategory())
                 .price(postRequestDto.getPrice())
                 .build();
+
         postRepository.save(post);
 
         return PostResponseDto.builder()
@@ -41,14 +49,37 @@ public class PostService {
     }
 
     @Transactional      //리스트로 보내기
-    public PostResponseDto showDetail(Long postId, User user) {
+    public PostDetailDto showDetail(Long postId, User user) {
 
         Post post = postRepository.findById(postId).orElse(null);
         if (post == null) {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
 
-        return PostResponseDto.builder()
+        PostDetailDto postDetailDto = new PostDetailDto();
+        List<PostInsideDto> postInsideDtos = new ArrayList<>();
+
+        for (PostInsideDto postInsideDto : postDetailDto.getInsideList()) {
+
+            Post insidePost = postRepository.findByTitle(postInsideDto.getTitle()).orElse(null);
+            if (insidePost != null && insidePost.getPostId().equals(postId)) continue;
+            // 판매자의 다른 상품란에 표시될 목록 중 "다른 상품"이 아닌 "상세 페이지에 이미 게시된 상품"은 제외해야
+            // if (어쩌고저쩌고) continue; insidePost가 null인 경우도 상정해야.
+            // 4개씩 보이는 건 잘 모르겠다. pageable 을 어떻게 잘 활용하면 될 것 같은데 개념 이해가 부족.
+
+            String title = postInsideDto.getTitle();
+            int price = postInsideDto.getPrice();
+            String goodsImg = postInsideDto.getGoodsImg();
+            // 작성자가 동일한 것만 더하고 싶다. 그러면 어떻게? 일단 if문을 써야 한다는 것 자체는 알겠는데.
+
+            if (insidePost != null && user.equals(insidePost.getUser())) {
+                postInsideDtos.add(new PostInsideDto(title, price, goodsImg));
+            }
+        }
+        // 이 부분은 좀 무거워보여서 이후 refactoring 작업 때 다른 method로 내보내야 할 듯.
+
+
+        return PostDetailDto.builder()
                 .username(user.getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -56,6 +87,7 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
+                .insideList(postInsideDtos)
                 .build();
     }
 
