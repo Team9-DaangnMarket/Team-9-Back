@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -40,7 +42,7 @@ public class PostService {
                 .build();
     }
 
-    @Transactional
+    @Transactional      //리스트로 보내기
     public PostResponseDto showDetail(Long postId, User user) {
 
         Post post = postRepository.findById(postId).orElse(null);

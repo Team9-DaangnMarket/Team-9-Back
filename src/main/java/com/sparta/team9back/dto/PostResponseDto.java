@@ -2,6 +2,8 @@ package com.sparta.team9back.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Getter
 @Setter

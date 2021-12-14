@@ -19,13 +19,6 @@ public class UserService {
     public void registerUser(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
 
-        String profileImg = requestDto.getProfileImg();
-
-        if(requestDto.getProfileImg() == null)
-            profileImg = "default.img";
-        else
-            profileImg = requestDto.getProfileImg();
-
         if(userRepository.existsByUsername(username)){
             throw new IllegalArgumentException("중복된 아이디 입니다.");
         }
@@ -37,6 +30,7 @@ public class UserService {
 
         // 유저 생성
         User user = new User(requestDto, enPassword);
+        System.out.println(user);
         userRepository.save(user); // DB 저장
     }
 
