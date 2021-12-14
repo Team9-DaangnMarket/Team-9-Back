@@ -3,6 +3,7 @@ package com.sparta.team9back.model;
 // >.<
 import com.sparta.team9back.dto.User.SignupRequestDto;
 import com.sparta.team9back.validator.UserInfoValidator;
+import com.sparta.team9back.validator.UserInfoValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -30,7 +31,6 @@ public class User {
     @Column
     private String profileImg;
 
-
     public User(SignupRequestDto requestDto, String enPassword){
         UserInfoValidator.validateUserInfoInput(requestDto);
         this.username = requestDto.getUsername();
@@ -42,7 +42,6 @@ public class User {
         this.username = userId;
         this.nickname = nickname;
         this.password = encodedPassword;
-
     }
 
 //    public void  update(SignupRequestDto requestDto) {
