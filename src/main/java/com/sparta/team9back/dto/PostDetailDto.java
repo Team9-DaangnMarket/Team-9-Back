@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PostDetailDto {
+    private Long postId;
     private String username;
     private String title;
     private String content;

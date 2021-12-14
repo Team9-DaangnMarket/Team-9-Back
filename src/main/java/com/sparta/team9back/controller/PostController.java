@@ -29,13 +29,10 @@ public class PostController {
     // 상세 게시글 보기(좋아요 미구현)
     @GetMapping("/posts/{postId}")
 
-    public ResponseEntity<PostResponseDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-
-
-       PostResponseDto postResponseDto = postService.showDetail(postId, userDetails.getUser());
-
+    public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
        return ResponseEntity.ok()
-               .body(postResponseDto);
+               .body(postDetailDto);
     }
 
     // 게시글 수정(좋아요 미구현)
@@ -47,7 +44,7 @@ public class PostController {
     // 게시글 삭제(댓글 추가 구현 경우 수정할 필요성 있음)
     @DeleteMapping("/posts/{postId}")
     public void deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        postService.deletePost(postId, userDetails.getUser());
+        postService.deletePost(postId, userDetails); // userDetails.getUser()
     }
 
 }

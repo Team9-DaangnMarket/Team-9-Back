@@ -31,6 +31,7 @@ public class HomeService {
         String name = "abc";
 
         return new HomeResponseDto(
+                post.getPostId(),
                 name,
                 post.getTitle(),
                 post.getPrice(),

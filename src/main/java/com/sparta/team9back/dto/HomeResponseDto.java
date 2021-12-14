@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 @Builder
 public class HomeResponseDto {
+    Long postId;
     String username;
     String title;
     int price;
