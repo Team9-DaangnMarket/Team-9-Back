@@ -1,8 +1,6 @@
 package com.sparta.team9back.model;
 
-// >.<
 import com.sparta.team9back.dto.User.SignupRequestDto;
-import com.sparta.team9back.validator.UserInfoValidator;
 import com.sparta.team9back.validator.UserInfoValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,12 +41,4 @@ public class User {
         this.nickname = nickname;
         this.password = encodedPassword;
     }
-
-//    public void  update(SignupRequestDto requestDto) {
-//        UserInfoValidator.validateUserInfoInput(requestDto);
-//
-//        this.username = requestDto.getUserId();
-//        this.nickname = requestDto.getNickname();
-//
-//    }
 }
