@@ -1,5 +1,6 @@
 package com.sparta.team9back.controller;
 
+import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.security.UserDetailsImpl;
@@ -22,7 +23,7 @@ public class PostController {
 
     // 상세 게시글 보기(좋아요 미구현)
     @GetMapping("/posts/{postId}")
-    public PostResponseDto showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public PostDetailDto showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return postService.showDetail(postId, userDetails.getUser());
     }
