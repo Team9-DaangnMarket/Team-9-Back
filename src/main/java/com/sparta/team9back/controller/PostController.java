@@ -4,7 +4,10 @@ import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.PostService;
+import com.sun.org.apache.xpath.internal.operations.String;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Request;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,15 +19,20 @@ public class PostController {
 
     // 게시글 작성(좋아요 미구현)
     @PostMapping("/posts")
-    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return postService.createPost(postRequestDto, userDetails.getUser());
+    public ResponseEntity< PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+       PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
+        return ResponseEntity.ok()
+                .body(postResponseDto);
     }
 
     // 상세 게시글 보기(좋아요 미구현)
     @GetMapping("/posts/{postId}")
-    public PostResponseDto showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<PostResponseDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return postService.showDetail(postId, userDetails.getUser());
+       PostResponseDto postResponseDto = postService.showDetail(postId, userDetails.getUser());
+
+       return ResponseEntity.ok()
+               .body(postResponseDto);
     }
 
     // 게시글 수정(좋아요 미구현)
