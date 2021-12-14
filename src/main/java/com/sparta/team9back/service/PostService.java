@@ -120,6 +120,7 @@ public class PostService {
 
     @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
+
         User user = UserInfoValidator.userDetailsIsNull(userDetails);
 
         Optional<Post> post = postRepository.findById(postId);

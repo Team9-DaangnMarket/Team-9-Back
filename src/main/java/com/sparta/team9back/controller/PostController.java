@@ -5,9 +5,7 @@ import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.PostService;
-import com.sun.org.apache.xpath.internal.operations.String;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Request;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +18,7 @@ public class PostController {
 
     // 게시글 작성(좋아요 미구현)
     @PostMapping("/posts")
-    public ResponseEntity< PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
        PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
         return ResponseEntity.ok()
                 .body(postResponseDto);
