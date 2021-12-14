@@ -32,6 +32,7 @@ public class PostService {
                 .category(postRequestDto.getCategory())
                 .price(postRequestDto.getPrice())
                 .build();
+
         postRepository.save(post);
 
         return PostResponseDto.builder()
@@ -67,8 +68,11 @@ public class PostService {
             String title = postInsideDto.getTitle();
             int price = postInsideDto.getPrice();
             String goodsImg = postInsideDto.getGoodsImg();
+            // 작성자가 동일한 것만 더하고 싶다. 그러면 어떻게? 일단 if문을 써야 한다는 것 자체는 알겠는데.
 
-            postInsideDtos.add(new PostInsideDto(title, price, goodsImg));
+            if (insidePost != null && user.equals(insidePost.getUser())) {
+                postInsideDtos.add(new PostInsideDto(title, price, goodsImg));
+            }
         }
         // 이 부분은 좀 무거워보여서 이후 refactoring 작업 때 다른 method로 내보내야 할 듯.
 
