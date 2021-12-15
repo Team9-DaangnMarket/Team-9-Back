@@ -1,4 +1,4 @@
-package com.sparta.team9back.dto;
+package com.sparta.team9back.dto.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

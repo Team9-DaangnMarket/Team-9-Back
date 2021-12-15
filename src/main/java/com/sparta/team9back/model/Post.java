@@ -3,6 +3,8 @@ package com.sparta.team9back.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.team9back.dto.PostRequestDto;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class Post extends Timestamped {
     @JoinColumn
     private Category category;
 
-//    @Column
+    //    @Column
 //    private int visitCount;
     public void update(PostRequestDto postRequestDto, Category category) {
         this.title = postRequestDto.getTitle();
@@ -60,5 +62,13 @@ public class Post extends Timestamped {
         this.goodsImg = postRequestDto.getGoodsImg();
         this.negoCheck = postRequestDto.getNegoCheck();
         this.category = category;
+
+
     }
+
+    @PrePersist
+    public void prePersist() {
+        this.visitCount = this.visitCount == null ? 0 : this.visitCount;
+    }
+
 }

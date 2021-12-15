@@ -1,7 +1,7 @@
 package com.sparta.team9back.service;
 
-import com.sparta.team9back.dto.CheckIdResponseDto;
-import com.sparta.team9back.dto.CheckNicknameResponseDto;
+import com.sparta.team9back.dto.User.CheckIdResponseDto;
+import com.sparta.team9back.dto.User.CheckNicknameResponseDto;
 import com.sparta.team9back.dto.User.CheckIdRequestDto;
 import com.sparta.team9back.dto.User.CheckNicknameRequestDto;
 import com.sparta.team9back.dto.User.SignupRequestDto;
