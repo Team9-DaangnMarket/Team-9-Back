@@ -26,7 +26,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    @Transactional // 이걸 잊지 않았나 하는 생각.
+    @Transactional
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
 
         Post post = Post.builder()
@@ -61,10 +61,6 @@ public class PostService {
         if (post == null) {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
-        //방문 시 조회 수 증가
-//        Integer visitCount = post.getVisitCount();
-//        post.setVisitCount(visitCount + 1);
-
 
 
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(user);
@@ -74,32 +70,27 @@ public class PostService {
         for (Post insidePost : postList) {
             if (postInsideDtos.size() == 4) break;
             if (insidePost.getPostId().equals(postId)) continue;
-            // 판매자의 다른 상품란에 표시될 목록 중 "다른 상품"이 아닌 "상세 페이지에 이미 게시된 상품"은 제외해야
-            // if (어쩌고저쩌고) continue; insidePost가 null인 경우도 상정해야.
-            // 4개씩 보이는 건 잘 모르겠다. pageable 을 어떻게 잘 활용하면 될 것 같은데 개념 이해가 부족.
 
             Long insideId = insidePost.getPostId();
             String title = insidePost.getTitle();
             int price = insidePost.getPrice();
             String goodsImg = insidePost.getGoodsImg();
-            // 작성자가 동일한 것만 더하고 싶다. 그러면 어떻게? 일단 if문을 써야 한다는 것 자체는 알겠는데.
 
                 postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
-        // 이 부분은 좀 무거워보여서 이후 refactoring 작업 때 다른 method로 내보내야 할 듯.
 
+        Post postMain = postRepository.findById(postId).orElse(null);
 
         return PostDetailDto.builder()
                 .postId(postId)
-                .nickname(user.getNickname())
-                .username(user.getUsername())
+                .nickname(postMain.getUser().getNickname())
+                .username(postMain.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                //.visitCount(post.getVisitCount())
                 .insideList(postInsideDtos)
                 .build();
     }
@@ -111,20 +102,6 @@ public class PostService {
         );
         post.update(postRequestDto);
     }
-
-//    @Transactional
-//    public void deletePost(Long postId, User user) {
-//        userRepository.delete(userRepository.findById(user.getId()).orElseThrow(() -> new UserNotFoundException(User.class, user.getId())));
-//    }
-//    @Transactional
-//    public void deletePost(Long postId, User user) {
-////        Long checkId = postRepository.findByUser(user).orElse(null).getPostId();
-////        if(checkId.equals(postId))
-//        Post post = postRepository.findByUser(user).orElse(null);
-//        assert post != null;
-//        if ( postId.equals(post.getUser().getId())) {
-//            postRepository.deleteById(postId);
-//        }
 
     @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
@@ -140,7 +117,4 @@ public class PostService {
 
         postRepository.deleteById(postId);
     }
-        // 댓글을 추가할 경우, 그리고 Post와 Comment entity 간에 cascade 설정을 해놓지 않은 경우
-        // 댓글이 달린 게시글을 삭제할 때 Service에서 게시글에 달린 댓글을 전부 삭제하는 작업이 선행될 필요가 있음
-
 }
