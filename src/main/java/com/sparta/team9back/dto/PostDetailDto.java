@@ -17,8 +17,9 @@ public class PostDetailDto {
     private String content;
     private int price;
     private String goodsImg;
-    private boolean negoCheck;
+    private Boolean negoCheck;
     private String category;
+    private Boolean likeCheck;
 //    private int visitCount;
     private List<PostInsideDto> insideList;
 }

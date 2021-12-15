@@ -6,6 +6,7 @@ import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
+import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.repository.UserRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
@@ -24,7 +25,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final PostLikeRepository postLikeRepository;
 
     @Transactional
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
@@ -79,6 +80,7 @@ public class PostService {
 
                 postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
+        Boolean likeCheck = postLikeRepository.existsByUserAndPost(postMain.getUser(), post);
 
         return PostDetailDto.builder()
                 .postId(postId)
@@ -91,6 +93,7 @@ public class PostService {
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
                 .insideList(postInsideDtos)
+                .likeCheck(likeCheck)
                 .build();
     }
 
