@@ -29,17 +29,12 @@ public class User {
     @Column(columnDefinition = "varchar(255) default 'default.img'")
     private String profileImg;
 
-    public User(SignupRequestDto requestDto, String enPassword){        //이렇게 해도 되나?
+    public User(SignupRequestDto requestDto, String enPassword) {
         UserInfoValidator.validateUserInfoInput(requestDto);
         this.username = requestDto.getUsername();
         this.nickname = requestDto.getNickname();
         this.password = enPassword;
-
-        if(requestDto.getProfileImg() == null){
-            this.profileImg = "default.img";
-        }
-        else
-            this.profileImg = requestDto.getProfileImg();
+        this.profileImg = requestDto.getProfileImg();
     }
 
     public User(String nickname, String encodedPassword, String username) {
