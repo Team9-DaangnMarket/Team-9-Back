@@ -64,10 +64,9 @@ public class PostService {
     @Transactional      //리스트로 보내기
     public PostDetailDto showDetail(Long postId, User user) {
 
-        Post post = postRepository.findById(postId).orElse(null);
-        if (post == null) {
-            throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
-        }
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("해당 게시글 정보가 존재하지 않습니다.")
+        );
 
         Post postMain = postRepository.findByPostId(postId).orElse(null);
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());

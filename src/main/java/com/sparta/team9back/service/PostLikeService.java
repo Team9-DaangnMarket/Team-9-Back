@@ -34,5 +34,4 @@ public class PostLikeService {
         }
         postRepository.save(post);
     }
-
 }
