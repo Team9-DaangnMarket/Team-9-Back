@@ -62,8 +62,8 @@ public class PostService {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
         //방문 시 조회 수 증가
-        Integer visitCount = post.getVisitCount();
-        post.setVisitCount(visitCount + 1);
+//        Integer visitCount = post.getVisitCount();
+//        post.setVisitCount(visitCount + 1);
 
 
 
@@ -99,7 +99,7 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                .visitCount(post.getVisitCount())
+                //.visitCount(post.getVisitCount())
                 .insideList(postInsideDtos)
                 .build();
     }
