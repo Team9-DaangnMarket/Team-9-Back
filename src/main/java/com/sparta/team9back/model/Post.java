@@ -1,23 +1,17 @@
 package com.sparta.team9back.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.team9back.dto.PostRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post extends Timestamped {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -44,9 +38,11 @@ public class Post extends Timestamped {
     @Column
     private String category;
 
-    @JsonIgnoreProperties({"post"})
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<PostLike> likeList;
+    @Column
+    private int postLikes;
+
+    @Column
+    private Integer visitCount;
 
 
     public void update(PostRequestDto postRequestDto) {

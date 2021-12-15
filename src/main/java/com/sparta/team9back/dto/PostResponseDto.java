@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 public class PostResponseDto {
     String username;
+    String nickname;
     String title;
     String content;
     int price;

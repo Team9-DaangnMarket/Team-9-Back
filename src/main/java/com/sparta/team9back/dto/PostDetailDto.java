@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 public class PostDetailDto {
     private Long postId;
+    private String nickname;
     private String username;
     private String title;
     private String content;
@@ -18,5 +19,6 @@ public class PostDetailDto {
     private String goodsImg;
     private boolean negoCheck;
     private String category;
+    private Integer visitCount; // int아닌가?
     private List<PostInsideDto> insideList;
 }
