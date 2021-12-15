@@ -1,14 +1,12 @@
 package com.sparta.team9back.dto;
 
-import com.sparta.team9back.model.Category;
-import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
 public class CategoryResponseDto {
     private Long categoryId;
-    private String category;
+    private String categoryName;
 }
+

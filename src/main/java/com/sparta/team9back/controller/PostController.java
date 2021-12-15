@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RequiredArgsConstructor
 @RestController
 public class PostController {
@@ -30,7 +28,6 @@ public class PostController {
 
     // 상세 게시글 보기(좋아요 미구현)
     @GetMapping("/posts/{postId}")
-
     public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
         return ResponseEntity.ok()

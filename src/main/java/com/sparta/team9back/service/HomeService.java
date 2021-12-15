@@ -34,7 +34,8 @@ public class HomeService {
                 post.getTitle(),
                 post.getPrice(),
                 post.getGoodsImg(),
-                post.getPostLikes()
+                post.getPostLikes(),
+                post.getCreatedAt()
         );
     }
 }

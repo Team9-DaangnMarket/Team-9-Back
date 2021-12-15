@@ -21,4 +21,6 @@ public class PostLikeController {
 //        }
         postLikeService.clickPostLike(userDetails.getUser(), postId);
     }
+
 }
+

@@ -4,9 +4,11 @@ import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostInsideDto;
 import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
+import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.PostLikeRepository;
+import com.sparta.team9back.repository.CategoryRepository;
 import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
@@ -25,10 +27,14 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostLikeRepository postLikeRepository;
+    private final CategoryRepository categoryRepository;
 
 
     @Transactional
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
+
+        String categoryName = postRequestDto.getCategoryName();
+        Category category = categoryRepository.findByCategoryName(categoryName).orElse(null);
 
         Post post = Post.builder()
                 .user(user)
@@ -36,7 +42,7 @@ public class PostService {
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
                 .negoCheck(postRequestDto.getNegoCheck())
-                .category(postRequestDto.getCategory())
+                .category(category)
                 .price(postRequestDto.getPrice())
                 .build();
 
@@ -48,7 +54,7 @@ public class PostService {
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
-                .category(postRequestDto.getCategory())
+                .category(category)
                 .goodsImg(postRequestDto.getGoodsImg())
                 .price(postRequestDto.getPrice())
                 .negoCheck(postRequestDto.getNegoCheck())
@@ -65,12 +71,10 @@ public class PostService {
 
         Post postMain = postRepository.findById(postId).orElse(null);
 
-
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
 
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
-
         for (Post insidePost : postList) {
             if (postInsideDtos.size() == 4) break;
             if (insidePost.getPostId().equals(postId)) continue;
@@ -80,8 +84,9 @@ public class PostService {
             int price = insidePost.getPrice();
             String goodsImg = insidePost.getGoodsImg();
 
-                postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
+            postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
+
         Boolean likeCheck = postLikeRepository.existsByUserAndPost(postMain.getUser(), post);
 
         return PostDetailDto.builder()
@@ -94,6 +99,8 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
+                //.visitCount(post.getVisitCount())
+                .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
                 .likeCheck(likeCheck)
                 .build();
@@ -104,12 +111,15 @@ public class PostService {
         Post post = postRepository.findByUserAndPostId(user, postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
         );
-        post.update(postRequestDto);
+
+        String categoryName = postRequestDto.getCategoryName();
+        Category category= categoryRepository.findByCategoryName(categoryName).orElse(null);
+
+        post.update(postRequestDto, category);
     }
 
     @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
-
         User user = UserInfoValidator.userDetailsIsNull(userDetails);
 
         Optional<Post> post = postRepository.findById(postId);
@@ -119,7 +129,6 @@ public class PostService {
         if (!user.getId().equals(post.get().getUser().getId())) {
             throw new IllegalArgumentException("당신의 게시글이 아닙니다.");
         }
-
         postRepository.deleteById(postId);
     }
 }

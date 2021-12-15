@@ -1,8 +1,5 @@
 
-
 package com.sparta.team9back.model;
-
-import com.sparta.team9back.dto.MyPostLikeRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostLike {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postLikeId;

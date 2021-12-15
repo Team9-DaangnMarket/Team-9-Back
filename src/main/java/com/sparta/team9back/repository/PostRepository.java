@@ -16,7 +16,6 @@ public interface PostRepository extends JpaRepository <Post, Long>{
     Optional<Post> findByUserAndPostId(User user, Long postId);
 
     Optional<Post> findByPostId(Long postId);
-    Optional<Post> findByUser(User user);
 
     List<Post> findAllByUserOrderByPostIdDesc(User user);
 
@@ -25,13 +24,10 @@ public interface PostRepository extends JpaRepository <Post, Long>{
 
     @Modifying
     @Query("update Post a set a.postLikes = a.postLikes + 1 where a.postId = :id")
-    int upLikeCnt(Long id);
+    void upLikeCnt(Long id);
 
     @Modifying
     @Query("update Post a set a.postLikes = a.postLikes - 1 where a.postId = :id")
-    int downLikeCnt(Long id);
+    void downLikeCnt(Long id);
 }
-
-
-
 

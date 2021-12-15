@@ -8,17 +8,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class MyPostLikeResponseDto {
     private Long postLikeId;
     private String title;
     private int price;
-//    private String goodsImg;
+    private String goodsImg;
+
 
     public MyPostLikeResponseDto(PostLike postLike) {
         this.postLikeId = postLike.getPostLikeId();
         this.title = postLike.getPost().getTitle();
         this.price = postLike.getPost().getPrice();
-//        this.goodsImg = postLike.getPost().getGoodsImg();
+        this.goodsImg = postLike.getPost().getGoodsImg();
     }
 
 }

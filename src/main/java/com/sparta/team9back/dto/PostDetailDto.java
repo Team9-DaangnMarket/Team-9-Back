@@ -1,7 +1,10 @@
 package com.sparta.team9back.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sparta.team9back.model.Category;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,8 +21,13 @@ public class PostDetailDto {
     private int price;
     private String goodsImg;
     private Boolean negoCheck;
-    private String category;
     private Boolean likeCheck;
 //    private int visitCount;
+    private Category category;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+
+
     private List<PostInsideDto> insideList;
 }

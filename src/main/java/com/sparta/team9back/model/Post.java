@@ -3,11 +3,8 @@ package com.sparta.team9back.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.team9back.dto.PostRequestDto;
 import lombok.*;
-
 import javax.persistence.*;
-
 import java.util.List;
-
 
 @Entity
 @Getter
@@ -16,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post extends Timestamped {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -39,10 +37,6 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private Boolean negoCheck;
 
-    @Column
-    private String category;
-
-
     @JsonIgnoreProperties({"post"})
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostLike> likeList;
@@ -53,13 +47,18 @@ public class Post extends Timestamped {
     @Column
     private Integer visitCount;
 
+    @ManyToOne
+    @JoinColumn
+    private Category category;
 
-    public void update(PostRequestDto postRequestDto) {
+//    @Column
+//    private int visitCount;
+    public void update(PostRequestDto postRequestDto, Category category) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
         this.price = postRequestDto.getPrice();
         this.goodsImg = postRequestDto.getGoodsImg();
         this.negoCheck = postRequestDto.getNegoCheck();
-        this.category = postRequestDto.getCategory();
+        this.category = category;
     }
 }
