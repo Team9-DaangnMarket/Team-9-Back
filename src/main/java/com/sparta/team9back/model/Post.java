@@ -4,6 +4,8 @@ import com.sparta.team9back.dto.PostRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -40,7 +42,7 @@ public class Post {
     private String category;
 
     @Column
-    private int likeCount;
+    private int postLikes;
 
     @Column
     private Integer visitCount;

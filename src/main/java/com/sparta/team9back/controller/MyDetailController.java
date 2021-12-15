@@ -15,8 +15,8 @@ public class MyDetailController {
     private MyDetailService myDetailService;
 
     @GetMapping("/user/details")
-    public ResponseEntity<MyDetailResponseDto> getRecommend(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        MyDetailResponseDto myDetailResponseDto = myDetailService.getRecommend(userDetails);
+    public ResponseEntity<MyDetailResponseDto> getPostLike(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        MyDetailResponseDto myDetailResponseDto = myDetailService.getPostLike(userDetails);
 
         return ResponseEntity.ok()
                 .body(myDetailResponseDto);
