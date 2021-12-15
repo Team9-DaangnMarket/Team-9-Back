@@ -1,9 +1,13 @@
 package com.sparta.team9back.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sparta.team9back.dto.PostRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -11,7 +15,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Post extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -39,8 +43,9 @@ public class Post {
     @Column
     private String category;
 
-    @Column
-    private int likeCount;
+    @JsonIgnoreProperties({"post"})
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostLike> likeList;
 
     @Column
     private Integer visitCount;

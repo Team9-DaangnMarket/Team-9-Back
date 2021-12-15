@@ -28,15 +28,13 @@ public class HomeService {
 
     private HomeResponseDto createPostDto(Post post) {
 
-        String name = "abc";
-
         return new HomeResponseDto(
                 post.getPostId(),
-                name,
+                post.getUser().getUsername(),
                 post.getTitle(),
                 post.getPrice(),
                 post.getGoodsImg(),
-                post.getLikeCount()
+                post.getPostLikes().size()
         );
     }
 }

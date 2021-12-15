@@ -15,7 +15,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public void registerUser(SignupRequestDto requestDto) {
         String username = requestDto.getUsername();
 
@@ -30,10 +29,6 @@ public class UserService {
 
         // 유저 생성
         User user = new User(requestDto, enPassword);
-        System.out.println(user);
         userRepository.save(user); // DB 저장
     }
-
-
-
 }

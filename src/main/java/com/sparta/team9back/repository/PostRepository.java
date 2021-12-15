@@ -14,10 +14,12 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository <Post, Long>{
     Optional<Post> findByUserAndPostId(User user, Long postId);
-    List<Post> findAllByUserOrderByPostIdDesc(User user);
+    Optional<Post> findByPostId(Long postId);
     Optional<Post> findByUser(User user);
     Page<Post> findAllByOrderByPostIdDesc(Pageable pageable);
     Optional<Post> findByTitle(String title);
 
+
+    List<Post> findAllByUserOrderByPostIdDesc(User user);
 
 }
