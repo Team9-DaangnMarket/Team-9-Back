@@ -79,11 +79,9 @@ public class PostService {
             String title = insidePost.getTitle();
             int price = insidePost.getPrice();
             String goodsImg = insidePost.getGoodsImg();
-            // 작성자가 동일한 것만 더하고 싶다. 그러면 어떻게? 일단 if문을 써야 한다는 것 자체는 알겠는데.
 
             postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
-        // 이 부분은 좀 무거워보여서 이후 refactoring 작업 때 다른 method로 내보내야 할 듯.
 
         return PostDetailDto.builder()
                 .postId(postId)
@@ -112,20 +110,6 @@ public class PostService {
 
         post.update(postRequestDto, category);
     }
-
-//    @Transactional
-//    public void deletePost(Long postId, User user) {
-//        userRepository.delete(userRepository.findById(user.getId()).orElseThrow(() -> new UserNotFoundException(User.class, user.getId())));
-//    }
-//    @Transactional
-//    public void deletePost(Long postId, User user) {
-////        Long checkId = postRepository.findByUser(user).orElse(null).getPostId();
-////        if(checkId.equals(postId))
-//        Post post = postRepository.findByUser(user).orElse(null);
-//        assert post != null;
-//        if ( postId.equals(post.getUser().getId())) {
-//            postRepository.deleteById(postId);
-//        }
 
     @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
