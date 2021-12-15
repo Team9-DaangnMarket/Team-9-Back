@@ -4,10 +4,11 @@ import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostInsideDto;
 import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.dto.PostResponseDto;
+import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
+import com.sparta.team9back.repository.CategoryRepository;
 import com.sparta.team9back.repository.PostRepository;
-import com.sparta.team9back.repository.UserRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
 import lombok.RequiredArgsConstructor;
@@ -25,9 +26,13 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
 
     @Transactional // 이걸 잊지 않았나 하는 생각.
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
+
+        String categoryName = postRequestDto.getCategoryName();
+        Category category = categoryRepository.findByCategoryName(categoryName).orElse(null);
 
         Post post = Post.builder()
                 .user(user)
@@ -35,7 +40,7 @@ public class PostService {
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
                 .negoCheck(postRequestDto.getNegoCheck())
-                .category(postRequestDto.getCategory())
+                .category(category)
                 .price(postRequestDto.getPrice())
                 .build();
 
@@ -47,7 +52,7 @@ public class PostService {
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
-                .category(postRequestDto.getCategory())
+                .category(category)
                 .goodsImg(postRequestDto.getGoodsImg())
                 .price(postRequestDto.getPrice())
                 .negoCheck(postRequestDto.getNegoCheck())
@@ -61,22 +66,14 @@ public class PostService {
         if (post == null) {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
-        //방문 시 조회 수 증가
-//        int visitCount = post.getVisitCount();
-//        post.setVisitCount(visitCount + 1);
 
-
-
-        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(user);
+        Post postMain = postRepository.findByPostId(postId).orElse(null);
+        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
-
         for (Post insidePost : postList) {
             if (postInsideDtos.size() == 4) break;
             if (insidePost.getPostId().equals(postId)) continue;
-            // 판매자의 다른 상품란에 표시될 목록 중 "다른 상품"이 아닌 "상세 페이지에 이미 게시된 상품"은 제외해야
-            // if (어쩌고저쩌고) continue; insidePost가 null인 경우도 상정해야.
-            // 4개씩 보이는 건 잘 모르겠다. pageable 을 어떻게 잘 활용하면 될 것 같은데 개념 이해가 부족.
 
             Long insideId = insidePost.getPostId();
             String title = insidePost.getTitle();
@@ -88,11 +85,10 @@ public class PostService {
         }
         // 이 부분은 좀 무거워보여서 이후 refactoring 작업 때 다른 method로 내보내야 할 듯.
 
-
         return PostDetailDto.builder()
                 .postId(postId)
-                .nickname(user.getNickname())
-                .username(user.getUsername())
+                .nickname(postMain.getUser().getNickname())
+                .username(postMain.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())
@@ -110,7 +106,11 @@ public class PostService {
         Post post = postRepository.findByUserAndPostId(user, postId).orElseThrow(
                 () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
         );
-        post.update(postRequestDto);
+
+        String categoryName = postRequestDto.getCategoryName();
+        Category category= categoryRepository.findByCategoryName(categoryName).orElse(null);
+
+        post.update(postRequestDto, category);
     }
 
 //    @Transactional
@@ -138,7 +138,6 @@ public class PostService {
         if (!user.getId().equals(post.get().getUser().getId())) {
             throw new IllegalArgumentException("당신의 게시글이 아닙니다.");
         }
-
         postRepository.deleteById(postId);
     }
     // 댓글을 추가할 경우, 그리고 Post와 Comment entity 간에 cascade 설정을 해놓지 않은 경우

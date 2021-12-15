@@ -12,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post extends Timestamped {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -35,20 +36,21 @@ public class Post extends Timestamped {
     @Column(nullable = false)
     private Boolean negoCheck;
 
-    @Column
-    private String category;
+    @ManyToOne
+    @JoinColumn
+    private Category category;
 
     @Column
     private int postLikes;
 
 //    @Column
 //    private int visitCount;
-    public void update(PostRequestDto postRequestDto) {
+    public void update(PostRequestDto postRequestDto, Category category) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
         this.price = postRequestDto.getPrice();
         this.goodsImg = postRequestDto.getGoodsImg();
         this.negoCheck = postRequestDto.getNegoCheck();
-        this.category = postRequestDto.getCategory();
+        this.category = category;
     }
 }

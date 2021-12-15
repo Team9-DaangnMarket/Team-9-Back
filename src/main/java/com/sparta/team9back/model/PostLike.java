@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostLike {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postLikeId;
@@ -24,4 +25,5 @@ public class PostLike {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
+
 }

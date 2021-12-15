@@ -20,9 +20,9 @@ public interface PostRepository extends JpaRepository <Post, Long>{
 
     @Modifying
     @Query("update Post a set a.postLikes = a.postLikes + 1 where a.postId = :id")
-    int upLikeCnt(Long id);
+    void upLikeCnt(Long id); // 자료형을 void라고 바꿔도 무방하지 않을까?
 
     @Modifying
     @Query("update Post a set a.postLikes = a.postLikes - 1 where a.postId = :id")
-    int downLikeCnt(Long id);
+    void downLikeCnt(Long id);
 }
