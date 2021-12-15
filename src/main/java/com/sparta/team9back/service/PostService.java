@@ -8,7 +8,6 @@ import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.PostRepository;
-import com.sparta.team9back.repository.UserRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +25,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostLikeRepository postLikeRepository;
+
 
     @Transactional
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
@@ -65,7 +65,9 @@ public class PostService {
 
         Post postMain = postRepository.findById(postId).orElse(null);
 
+
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
+
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
 
@@ -107,6 +109,7 @@ public class PostService {
 
     @Transactional
     public void deletePost(Long postId, UserDetailsImpl userDetails) {
+
         User user = UserInfoValidator.userDetailsIsNull(userDetails);
 
         Optional<Post> post = postRepository.findById(postId);
