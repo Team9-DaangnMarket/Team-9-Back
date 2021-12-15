@@ -42,8 +42,8 @@ public class Post {
     @Column
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    Set<PostLike> postLikes = new HashSet<>();
+    @Column
+    private int postLikes;
 
 
     public void update(PostRequestDto postRequestDto) {
