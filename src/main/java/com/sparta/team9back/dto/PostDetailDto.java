@@ -1,5 +1,6 @@
 package com.sparta.team9back.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,8 @@ public class PostDetailDto {
     private String goodsImg;
     private boolean negoCheck;
     private String category;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 //    private int visitCount; // int아닌가?
     private List<PostInsideDto> insideList;

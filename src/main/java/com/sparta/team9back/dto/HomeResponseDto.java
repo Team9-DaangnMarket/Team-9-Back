@@ -1,5 +1,6 @@
 package com.sparta.team9back.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ public class HomeResponseDto {
     private int price;
     private String goodsImg;
     private int postLikes;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     // boolean nextPage;
