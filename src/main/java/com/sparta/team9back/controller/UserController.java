@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
     //회원가입
@@ -23,7 +22,6 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body("회원가입 완료");
-
     }
     @PostMapping("/userInfo")
     public ResponseEntity<UserInfoDto> getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -32,5 +30,4 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(userInfoDto);
     }
-
 }
