@@ -12,11 +12,13 @@ import java.util.List;
 public class PostDetailDto {
     private Long postId;
     private String username;
+    private String nickname;
     private String title;
     private String content;
     private int price;
     private String goodsImg;
     private boolean negoCheck;
     private String category;
+    private Integer visitCount;
     private List<PostInsideDto> insideList;
 }
