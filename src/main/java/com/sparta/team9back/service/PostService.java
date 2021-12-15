@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -42,6 +41,7 @@ public class PostService {
 
         return PostResponseDto.builder()
 
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
@@ -60,8 +60,8 @@ public class PostService {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
         //방문 시 조회 수 증가
-        Integer visitCount = post.getVisitCount();
-        post.setVisitCount(visitCount + 1);
+//        Integer visitCount = post.getVisitCount();
+//        post.setVisitCount(visitCount + 1);
 
 
 
@@ -90,6 +90,7 @@ public class PostService {
 
         return PostDetailDto.builder()
                 .postId(postId)
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
@@ -97,7 +98,7 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                .visitCount(post.getVisitCount())
+                //.visitCount(post.getVisitCount())
                 .insideList(postInsideDtos)
                 .build();
     }

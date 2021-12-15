@@ -25,16 +25,16 @@ public class HomeService {
         }
         return allPosts;
     }
-
     private HomeResponseDto createPostDto(Post post) {
 
         return new HomeResponseDto(
                 post.getPostId(),
                 post.getUser().getUsername(),
+                post.getUser().getNickname(),
                 post.getTitle(),
                 post.getPrice(),
                 post.getGoodsImg(),
-                post.getPostLikes().size()
+                post.getPostLikes()
         );
     }
 }

@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+
+import java.util.List;
+
+
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
 
     void deletePostLikeByPost(Post post);
@@ -24,6 +28,7 @@ public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     }
 
     Boolean existsByUserAndPost(User user, Post post);
-    //Boolean existByPost(Post post);
-    //Recommend findByPost(Post post);
+    List<PostLike> findAllByUser(User user);
+    PostLike findByUserAndPost(User user, Post post);
+
 }

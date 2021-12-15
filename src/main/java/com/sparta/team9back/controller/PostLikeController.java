@@ -17,6 +17,7 @@ public class PostLikeController {
     private final PostLikeService postLikeService;
 
     @PostMapping("/postLike/{postId}")
+
     public void registLike(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId) {
         postLikeService.onLike(userDetails, postId);
     }
@@ -24,6 +25,14 @@ public class PostLikeController {
     @DeleteMapping("/postLike/{postId}")
     public void unLike(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId) {
         postLikeService.unLike(userDetails, postId);
+    }
+
+
+    public void clickPostLike(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId) {
+//        if(userDetails == null) {
+//            throw new IllegalArgumentException("회원가입 후 이용해주세요");
+//        }
+        postLikeService.clickPostLike(userDetails.getUser(), postId);
     }
 
 }

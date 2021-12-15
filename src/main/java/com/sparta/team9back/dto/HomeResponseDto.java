@@ -10,9 +10,11 @@ import lombok.*;
 public class HomeResponseDto {
     Long postId;
     String username;
+    String nickname;
     String title;
     int price;
     String goodsImg;
-    int likeCount;
+    int postLikes;
+
     // boolean nextPage;
 }
