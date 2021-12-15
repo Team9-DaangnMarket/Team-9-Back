@@ -1,5 +1,9 @@
 package com.sparta.team9back.controller;
 
+import com.sparta.team9back.dto.CheckIdResponseDto;
+import com.sparta.team9back.dto.CheckNicknameResponseDto;
+import com.sparta.team9back.dto.User.CheckIdRequestDto;
+import com.sparta.team9back.dto.User.CheckNicknameRequestDto;
 import com.sparta.team9back.dto.User.SignupRequestDto;
 import com.sparta.team9back.dto.User.UserInfoDto;
 import com.sparta.team9back.model.User;
@@ -13,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-
     private final UserService userService;
 
     //회원가입
@@ -23,7 +26,6 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body("회원가입 완료");
-
     }
     @PostMapping("/userInfo")
     public ResponseEntity<UserInfoDto> getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
@@ -31,6 +33,20 @@ public class UserController {
         UserInfoDto userInfoDto = new UserInfoDto(user.getUsername(), user.getNickname(), user.getPassword());
         return ResponseEntity.ok()
                 .body(userInfoDto);
+    }
+    @PostMapping("/user/checkId")
+    public ResponseEntity<CheckIdResponseDto> idCheck(@RequestBody CheckIdRequestDto checkIdRequestDto) {
+        CheckIdResponseDto checkIdResponseDto = userService.checkId(checkIdRequestDto);
+
+        return ResponseEntity.ok()
+                .body(checkIdResponseDto);
+    }
+    @PostMapping("/user/checkNickname")
+    public ResponseEntity<CheckNicknameResponseDto> NicknameCheck(@RequestBody CheckNicknameRequestDto checkNicknameRequestDto) {
+        CheckNicknameResponseDto checkNicknameResponseDto = userService.checkNickname(checkNicknameRequestDto);
+
+        return ResponseEntity.ok()
+                .body(checkNicknameResponseDto);
     }
 
 }

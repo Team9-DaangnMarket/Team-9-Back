@@ -1,5 +1,8 @@
+
+
 package com.sparta.team9back.model;
 
+import com.sparta.team9back.dto.MyPostLikeRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,4 +27,5 @@ public class PostLike {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private User user;
+
 }
