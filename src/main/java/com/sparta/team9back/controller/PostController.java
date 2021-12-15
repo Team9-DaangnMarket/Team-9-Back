@@ -42,7 +42,7 @@ public class PostController {
     // 게시글 삭제(댓글 추가 구현 경우 수정할 필요성 있음)
     @DeleteMapping("/posts/{postId}")
     public void deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        postService.deletePost(postId, userDetails); // userDetails.getUser()
+        postService.deletePost(postId, userDetails);
     }
 
 }
