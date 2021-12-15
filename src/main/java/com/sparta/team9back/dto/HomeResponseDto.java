@@ -2,19 +2,22 @@ package com.sparta.team9back.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
 @Setter
 @Builder
 public class HomeResponseDto {
-    Long postId;
-    String username;
-    String nickname;
-    String title;
-    int price;
-    String goodsImg;
-    int likeCount;
+    private Long postId;
+    private String username;
+    private String nickname;
+    private String title;
+    private int price;
+    private String goodsImg;
+    private int postLikes;
+    private LocalDateTime createdAt;
 
     // boolean nextPage;
 }

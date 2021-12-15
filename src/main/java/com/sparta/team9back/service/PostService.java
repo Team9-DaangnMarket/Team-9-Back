@@ -25,7 +25,6 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserRepository userRepository;
 
     @Transactional // 이걸 잊지 않았나 하는 생각.
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
@@ -63,8 +62,8 @@ public class PostService {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
         //방문 시 조회 수 증가
-        Integer visitCount = post.getVisitCount();
-        post.setVisitCount(visitCount + 1);
+//        int visitCount = post.getVisitCount();
+//        post.setVisitCount(visitCount + 1);
 
 
 
@@ -100,7 +99,8 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                .visitCount(post.getVisitCount())
+                //.visitCount(post.getVisitCount())
+                .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
                 .build();
     }

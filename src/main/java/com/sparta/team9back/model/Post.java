@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Post extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
@@ -41,10 +41,8 @@ public class Post {
     @Column
     private int postLikes;
 
-    @Column
-    private Integer visitCount;
-
-
+//    @Column
+//    private int visitCount;
     public void update(PostRequestDto postRequestDto) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
