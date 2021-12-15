@@ -1,15 +1,13 @@
 package com.sparta.team9back.model;
 
 import com.sparta.team9back.dto.PostRequestDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -37,11 +35,15 @@ public class Post {
     @Column(nullable = false)
     private Boolean negoCheck;
 
+
     @Column
     private String category;
 
     @Column
     private int likeCount;
+
+    @Column
+    private Integer visitCount;
 
 
     public void update(PostRequestDto postRequestDto) {

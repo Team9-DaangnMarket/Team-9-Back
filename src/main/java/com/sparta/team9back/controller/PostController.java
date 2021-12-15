@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RequiredArgsConstructor
 @RestController
 public class PostController {
@@ -18,8 +20,8 @@ public class PostController {
 
     // 게시글 작성(좋아요 미구현)
     @PostMapping("/posts")
-    public ResponseEntity< PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-       PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
+    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        PostResponseDto postResponseDto = postService.createPost(postRequestDto, userDetails.getUser());
         return ResponseEntity.ok()
                 .body(postResponseDto);
     }
@@ -29,8 +31,8 @@ public class PostController {
 
     public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
-       return ResponseEntity.ok()
-               .body(postDetailDto);
+        return ResponseEntity.ok()
+                .body(postDetailDto);
     }
 
     // 게시글 수정(좋아요 미구현)
@@ -44,5 +46,7 @@ public class PostController {
     public void deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(postId, userDetails); // userDetails.getUser()
     }
+
+
 
 }
