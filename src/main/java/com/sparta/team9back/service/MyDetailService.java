@@ -21,8 +21,6 @@ public class MyDetailService {
 
         List<Recommend> recommendList = recommendRepository.findAllByUser(user);
 
-
         return new MyDetailResponseDto(recommendList);
     }
-
 }

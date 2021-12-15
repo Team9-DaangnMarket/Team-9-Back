@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -44,6 +43,7 @@ public class PostService {
 
         return PostResponseDto.builder()
 
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
@@ -91,6 +91,7 @@ public class PostService {
 
         return PostDetailDto.builder()
                 .postId(postId)
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())

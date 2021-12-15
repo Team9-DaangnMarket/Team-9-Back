@@ -11,6 +11,7 @@ import java.util.List;
 @Builder
 public class PostDetailDto {
     private Long postId;
+    private String nickname;
     private String username;
     private String nickname;
     private String title;

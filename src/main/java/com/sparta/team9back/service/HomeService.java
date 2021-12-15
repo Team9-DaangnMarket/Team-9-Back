@@ -25,14 +25,12 @@ public class HomeService {
         }
         return allPosts;
     }
-
     private HomeResponseDto createPostDto(Post post) {
-
-        String name = "abc";
 
         return new HomeResponseDto(
                 post.getPostId(),
-                name,
+                post.getUser().getUsername(),
+                post.getUser().getNickname(),
                 post.getTitle(),
                 post.getPrice(),
                 post.getGoodsImg(),

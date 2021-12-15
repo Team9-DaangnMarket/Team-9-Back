@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PostResponseDto {
+    String nickname;
     String username;
     String title;
     String content;
