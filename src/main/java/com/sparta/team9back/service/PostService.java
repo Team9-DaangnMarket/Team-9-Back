@@ -42,6 +42,7 @@ public class PostService {
         postRepository.save(post);
 
         return PostResponseDto.builder()
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
@@ -84,6 +85,7 @@ public class PostService {
 
         return PostDetailDto.builder()
                 .postId(postId)
+                .nickname(user.getNickname())
                 .username(user.getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
