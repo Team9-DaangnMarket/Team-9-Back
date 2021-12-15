@@ -50,8 +50,8 @@ public class Post extends Timestamped {
     @Column
     private int postLikes;
 
-//    @Column
-//    private Integer visitCount;
+    @Column
+    private Integer visitCount;
 
 
     public void update(PostRequestDto postRequestDto) {
