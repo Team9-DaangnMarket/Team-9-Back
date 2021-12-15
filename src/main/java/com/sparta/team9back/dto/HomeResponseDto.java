@@ -14,7 +14,7 @@ public class HomeResponseDto {
     String title;
     int price;
     String goodsImg;
-    int likeCount;
+    int postLikes;
 
     // boolean nextPage;
 }

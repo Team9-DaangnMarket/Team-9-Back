@@ -34,6 +34,7 @@ public class User {
         this.username = requestDto.getUsername();
         this.nickname = requestDto.getNickname();
         this.password = enPassword;
+
         if(requestDto.getProfileImg() == null){
             this.profileImg = "default.img";
         }

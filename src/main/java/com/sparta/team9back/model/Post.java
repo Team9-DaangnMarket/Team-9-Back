@@ -35,15 +35,14 @@ public class Post {
     @Column(nullable = false)
     private Boolean negoCheck;
 
-
     @Column
     private String category;
 
     @Column
-    private int likeCount;
+    private int postLikes;
 
-    @Column
-    private Integer visitCount;
+//    @Column
+//    private Integer visitCount;
 
 
     public void update(PostRequestDto postRequestDto) {

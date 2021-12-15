@@ -1,6 +1,6 @@
 package com.sparta.team9back.dto;
 
-import com.sparta.team9back.model.Recommend;
+import com.sparta.team9back.model.PostLike;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,11 +13,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class MyDetailResponseDto {
-    List<MyRecommendResponseDto> myRecommends = new ArrayList<>();
+    List<MyPostLikeResponseDto> myPostLikes = new ArrayList<>();
 
-    public MyDetailResponseDto(List<Recommend> recommendList) {
-        for (Recommend recommend : recommendList) {
-            this.myRecommends.add(new MyRecommendResponseDto(recommend));
+    public MyDetailResponseDto(List<PostLike> postLikeList) {
+        for (PostLike postLike : postLikeList) {
+            this.myPostLikes.add(new MyPostLikeResponseDto(postLike));
         }
     }
 }

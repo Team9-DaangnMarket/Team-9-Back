@@ -19,6 +19,6 @@ public class PostDetailDto {
     private String goodsImg;
     private boolean negoCheck;
     private String category;
-    private Integer visitCount;
+//    private int visitCount;
     private List<PostInsideDto> insideList;
 }

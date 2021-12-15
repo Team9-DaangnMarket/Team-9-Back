@@ -23,5 +23,4 @@ public class HomeController {
         PageRequest sortedByPostIdDesc = PageRequest.of(page, size, Sort.by("postId").descending());
         return homeService.findAllPosts(sortedByPostIdDesc);
     }
-
 }
