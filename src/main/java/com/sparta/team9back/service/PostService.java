@@ -32,7 +32,9 @@ public class PostService {
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
 
         String categoryName = postRequestDto.getCategoryName();
-        Category category = categoryRepository.findByCategoryName(categoryName).orElse(null);
+        Category category= categoryRepository.findByCategoryName(categoryName).orElseThrow(
+                () -> new NullPointerException("해당 카테고리명이 존재하지 않습니다.")
+        );
 
         Post post = Post.builder()
                 .user(user)
@@ -102,11 +104,12 @@ public class PostService {
     @Transactional
     public void updatePost(Long postId, PostRequestDto postRequestDto, User user) {
         Post post = postRepository.findByUserAndPostId(user, postId).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
+                () -> new NullPointerException("해당 게시글이 존재하지 않습니다.")
         );
 
-        String categoryName = postRequestDto.getCategoryName();
-        Category category= categoryRepository.findByCategoryName(categoryName).orElse(null);
+        Category category= categoryRepository.findByCategoryName(postRequestDto.getCategoryName()).orElseThrow(
+                () -> new NullPointerException("해당 카테고리명이 존재하지 않습니다.")
+        );
 
         post.update(postRequestDto, category);
     }
