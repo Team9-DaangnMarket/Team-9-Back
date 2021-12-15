@@ -35,7 +35,7 @@ public class HomeService {
                 post.getTitle(),
                 post.getPrice(),
                 post.getGoodsImg(),
-                post.getLikeCount()
+                post.getPostLikes().size()
         );
     }
 }

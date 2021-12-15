@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -40,8 +42,8 @@ public class Post {
     @Column
     private String category;
 
-    @Column
-    private int likeCount;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    Set<PostLike> postLikes = new HashSet<>();
 
 
     public void update(PostRequestDto postRequestDto) {

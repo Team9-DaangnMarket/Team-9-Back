@@ -30,7 +30,6 @@ public class UserService {
 
         // 유저 생성
         User user = new User(requestDto, enPassword);
-        System.out.println(user);
         userRepository.save(user); // DB 저장
     }
 
