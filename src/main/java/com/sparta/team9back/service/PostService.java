@@ -62,8 +62,9 @@ public class PostService {
             throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
         }
 
+        Post postMain = postRepository.findById(postId).orElse(null);
 
-        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(user);
+        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
 
@@ -78,8 +79,6 @@ public class PostService {
 
                 postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
-
-        Post postMain = postRepository.findById(postId).orElse(null);
 
         return PostDetailDto.builder()
                 .postId(postId)
