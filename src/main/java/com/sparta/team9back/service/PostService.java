@@ -90,6 +90,7 @@ public class PostService {
 
         Boolean likeCheck = postLikeRepository.existsByUserAndPost(user, post);
         System.out.println(likeCheck);
+
         return PostDetailDto.builder()
                 .postId(postId)
                 .nickname(postMain.getUser().getNickname())
@@ -100,11 +101,12 @@ public class PostService {
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                //.visitCount(post.getVisitCount())
+                .visitCount(post.getVisitCount())
                 .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
                 .likeCheck(likeCheck)
                 .build();
+
     }
 
     @Transactional
