@@ -1,16 +1,11 @@
 package com.sparta.team9back.service;
 
-import com.sparta.team9back.dto.User.CheckIdResponseDto;
-import com.sparta.team9back.dto.User.CheckNicknameResponseDto;
-import com.sparta.team9back.dto.User.CheckIdRequestDto;
-import com.sparta.team9back.dto.User.CheckNicknameRequestDto;
-import com.sparta.team9back.dto.User.SignupRequestDto;
+import com.sparta.team9back.dto.User.*;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @RequiredArgsConstructor

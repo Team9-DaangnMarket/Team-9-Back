@@ -9,6 +9,7 @@ import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.CategoryRepository;
+import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
@@ -40,12 +41,12 @@ public class PostService {
 
         Post post = Post.builder()
                 .user(user)
-                .goodsImg(postRequestDto.getGoodsImg())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
+                .price(postRequestDto.getPrice())
+                .goodsImg(postRequestDto.getGoodsImg())
                 .negoCheck(postRequestDto.getNegoCheck())
                 .category(category)
-                .price(postRequestDto.getPrice())
                 .build();
 
         postRepository.save(post);
@@ -70,9 +71,7 @@ public class PostService {
                 () -> new NullPointerException("해당 게시글 정보가 존재하지 않습니다.")
         );
 
-        Post postMain = postRepository.findById(postId).orElse(null);
-
-        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
+        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(post.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
         for (Post insidePost : postList) {
@@ -88,14 +87,12 @@ public class PostService {
         }
 
         Boolean likeCheck = postLikeRepository.existsByUserAndPost(user, post);
-        System.out.println(likeCheck);
-
         postRepository.upVisitCnt(postId);
 
         return PostDetailDto.builder()
                 .postId(postId)
-                .nickname(postMain.getUser().getNickname())
-                .username(postMain.getUser().getUsername())
+                .nickname(post.getUser().getNickname())
+                .username(post.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())

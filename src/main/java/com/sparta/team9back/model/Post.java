@@ -52,8 +52,6 @@ public class Post extends Timestamped {
     @JoinColumn
     private Category category;
 
-    //    @Column
-//    private int visitCount;
     public void update(PostRequestDto postRequestDto, Category category) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
@@ -61,13 +59,10 @@ public class Post extends Timestamped {
         this.goodsImg = postRequestDto.getGoodsImg();
         this.negoCheck = postRequestDto.getNegoCheck();
         this.category = category;
-
-
     }
 
     @PrePersist
     public void prePersist() {
         this.visitCount = this.visitCount == null ? 0 : this.visitCount;
     }
-
 }
