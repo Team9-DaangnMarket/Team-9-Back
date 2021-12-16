@@ -16,6 +16,7 @@ public interface PostRepository extends JpaRepository <Post, Long>{
     Optional<Post> findByUserAndPostId(User user, Long postId);
     List<Post> findAllByUserOrderByPostIdDesc(User user);
     Page<Post> findAllByOrderByPostIdDesc(Pageable pageable);
+    Page<Post> findAllByOrderByModifiedAtDesc(Pageable pageable);
     Optional<Post> findByPostId(Long postId);
 
     @Modifying
@@ -29,4 +30,8 @@ public interface PostRepository extends JpaRepository <Post, Long>{
     @Modifying
     @Query("update Post a set a.visitCount = a.visitCount + 1 where a.postId = :id")
     void upVisitCnt(Long id);
+
+    List<Post> findAllByOrderByModifiedAtDesc();
+
+    List<Post> findAllByOrderByPostIdDesc();
 }
