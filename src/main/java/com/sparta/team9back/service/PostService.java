@@ -132,7 +132,15 @@ public class PostService {
         }
         postRepository.deleteById(postId);
     }
-    // 댓글을 추가할 경우, 그리고 Post와 Comment entity 간에 cascade 설정을 해놓지 않은 경우
-    // 댓글이 달린 게시글을 삭제할 때 Service에서 게시글에 달린 댓글을 전부 삭제하는 작업이 선행될 필요가 있음
 
+    @Transactional
+    public List<String> setCategory(){
+
+        List<String> categoryList = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAll();
+        for (Category category :categories) {
+            categoryList.add(category.getCategoryName());
+        }
+        return categoryList;
+    }
 }

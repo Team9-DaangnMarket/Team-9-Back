@@ -1,11 +1,14 @@
 package com.sparta.team9back.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Getter
+@Builder
+@NoArgsConstructor
 public class CategoryResponseDto {
-    private Long categoryId;
-    private String categoryName;
+    private String[] categoryName;
 }

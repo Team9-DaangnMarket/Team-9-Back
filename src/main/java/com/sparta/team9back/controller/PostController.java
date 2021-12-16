@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 public class PostController {
@@ -42,6 +44,11 @@ public class PostController {
     @DeleteMapping("/posts/{postId}")
     public void deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(postId, userDetails);
+    }
+
+    @GetMapping("/posts/category")
+    public List<String> setCategory(){
+        return postService.setCategory();
     }
 
 }
