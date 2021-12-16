@@ -20,13 +20,15 @@ public class PostDetailDto {
     private String content;
     private int price;
     private String goodsImg;
-    private boolean negoCheck;
+    private Boolean negoCheck;
     private Boolean likeCheck;
     private Integer visitCount;
     private Category category;
+    private int postLike;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-//    private int visitCount; // int아닌가?
+
+
     private List<PostInsideDto> insideList;
 }

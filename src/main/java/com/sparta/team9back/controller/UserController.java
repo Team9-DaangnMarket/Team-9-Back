@@ -22,6 +22,7 @@ public class UserController {
         return ResponseEntity.ok()
                 .body("회원가입 완료");
     }
+
     @PostMapping("/userInfo")
     public ResponseEntity<UserInfoDto> getUserInfo(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
@@ -36,6 +37,7 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(checkIdResponseDto);
     }
+
     @PostMapping("/user/checkNickname")
     public ResponseEntity<CheckNicknameResponseDto> checkNickname(@RequestBody CheckNicknameRequestDto checkNicknameRequestDto) {
         CheckNicknameResponseDto checkNicknameResponseDto = userService.checkNickname(checkNicknameRequestDto);

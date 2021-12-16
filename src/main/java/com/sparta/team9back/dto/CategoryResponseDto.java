@@ -9,3 +9,4 @@ public class CategoryResponseDto {
     private Long categoryId;
     private String categoryName;
 }
+

@@ -1,5 +1,5 @@
-package com.sparta.team9back.model;
 
+package com.sparta.team9back.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

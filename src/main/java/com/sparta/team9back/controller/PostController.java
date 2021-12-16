@@ -2,7 +2,6 @@ package com.sparta.team9back.controller;
 
 import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostRequestDto;
-import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -18,18 +17,19 @@ public class PostController {
 
     // 게시글 작성(좋아요 미구현)
     @PostMapping("/posts")
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-       PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
+    public ResponseEntity<String> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        postService.createPost(postRequestDto, userDetails.getUser());
+
         return ResponseEntity.ok()
-                .body(postResponseDto);
+                .body("게시글작성 완료");
     }
 
     // 상세 게시글 보기(좋아요 미구현)
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
-       return ResponseEntity.ok()
-               .body(postDetailDto);
+        return ResponseEntity.ok()
+                .body(postDetailDto);
     }
 
     // 게시글 수정(좋아요 미구현)
@@ -43,5 +43,7 @@ public class PostController {
     public void deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.deletePost(postId, userDetails);
     }
+
+
 
 }

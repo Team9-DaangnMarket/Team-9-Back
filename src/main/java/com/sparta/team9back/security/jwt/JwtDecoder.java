@@ -30,11 +30,9 @@ public class JwtDecoder {
             throw new IllegalArgumentException("유효한 토큰이 아닙니다.");
         }
 
-        String username = decodedJWT
+        return decodedJWT
                 .getClaim(CLAIM_USER_NAME)
                 .asString();
-
-        return username;
     }
 
     private Optional<DecodedJWT> isValidToken(String token) {
@@ -51,7 +49,6 @@ public class JwtDecoder {
             log.error(e.getMessage());
         }
 
-        System.out.println("이것도안됨?");
         return Optional.ofNullable(jwt);
     }
 }
