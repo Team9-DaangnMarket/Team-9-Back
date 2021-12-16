@@ -6,7 +6,10 @@ import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,4 +69,12 @@ public class HomeService {
 
         return searchedPosts;
     }
+
+//    public Page<Post> seeOwnPosts(Long userId, int page, int size, String sortBy, boolean isAsc) {
+//        Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
+//        Sort sort = Sort.by(direction, sortBy);
+//        Pageable pageable = PageRequest.of(page, size, sort);
+//
+//        return postRepository.findAllByUserId(userId, pageable);
+//    }
 }

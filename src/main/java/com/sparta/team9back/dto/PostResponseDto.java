@@ -8,13 +8,13 @@ import lombok.*;
 @Setter
 @Builder
 public class PostResponseDto {
-    String nickname;
-    String username;
-    String title;
-    String content;
-    int price;
-    String goodsImg;
-    boolean negoCheck;
-    Category category;
+    private String nickname;
+    private String username;
+    private String title;
+    private String content;
+    private int price;
+    private String goodsImg;
+    private boolean negoCheck;
+    private String categoryName;
     //Boolean likeCheck;
 }

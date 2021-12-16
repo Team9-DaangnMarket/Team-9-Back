@@ -23,7 +23,7 @@ public class PostDetailDto {
     private Boolean negoCheck;
     private Boolean likeCheck;
     private Integer visitCount;
-    private Category category;
+    private String categoryName;
     private int postLike;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
