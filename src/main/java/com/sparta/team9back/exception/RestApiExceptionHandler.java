@@ -21,17 +21,17 @@ public class RestApiExceptionHandler {
         );
     }
 
-//    @ExceptionHandler(value = {NullPointerException.class})
-//    public ResponseEntity<Object> handleApiRequestException(NullPointerException ex) {
-//        RestApiException restApiException = new RestApiException();
-//        restApiException.setErrorCode(HttpStatus.NOT_FOUND.value());
-//        restApiException.setHttpStatus(HttpStatus.NOT_FOUND);
-//        restApiException.setErrorMessage(ex.getMessage());
-//
-//        return new ResponseEntity(
-//                restApiException,
-//                HttpStatus.NOT_FOUND
-//        );
-//    }
+    @ExceptionHandler(value = {NullPointerException.class})
+    public ResponseEntity<Object> handleApiRequestException(NullPointerException ex) {
+        RestApiException restApiException = new RestApiException();
+        restApiException.setErrorCode(HttpStatus.NOT_FOUND.value());
+        restApiException.setHttpStatus(HttpStatus.NOT_FOUND);
+        restApiException.setErrorMessage(ex.getMessage());
+
+        return new ResponseEntity(
+                restApiException,
+                HttpStatus.NOT_FOUND
+        );
+    }
 
 }

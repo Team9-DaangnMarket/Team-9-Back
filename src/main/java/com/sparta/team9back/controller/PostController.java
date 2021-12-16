@@ -1,5 +1,6 @@
 package com.sparta.team9back.controller;
 
+import com.sparta.team9back.dto.CategoryResponseDto;
 import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostRequestDto;
 import com.sparta.team9back.security.UserDetailsImpl;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -44,6 +47,8 @@ public class PostController {
         postService.deletePost(postId, userDetails);
     }
 
-
-
+    @GetMapping("/posts/category")
+    public List<String> setCategory(){
+        return postService.setCategory();
+    }
 }

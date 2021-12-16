@@ -1,9 +1,6 @@
 package com.sparta.team9back.service;
 
-import com.sparta.team9back.dto.PostDetailDto;
-import com.sparta.team9back.dto.PostInsideDto;
-import com.sparta.team9back.dto.PostRequestDto;
-import com.sparta.team9back.dto.PostResponseDto;
+import com.sparta.team9back.dto.*;
 import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
@@ -120,7 +117,6 @@ public class PostService {
         Category category= categoryRepository.findByCategoryName(postRequestDto.getCategoryName()).orElseThrow(
                 () -> new NullPointerException("해당 카테고리명이 존재하지 않습니다.")
         );
-
         post.update(postRequestDto, category);
     }
 
@@ -136,5 +132,16 @@ public class PostService {
             throw new IllegalArgumentException("당신의 게시글이 아닙니다.");
         }
         postRepository.deleteById(postId);
+    }
+
+    @Transactional
+    public List<String> setCategory(){
+
+        List<String> categoryList = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAll();
+        for (Category category :categories) {
+            categoryList.add(category.getCategoryName());
+        }
+        return categoryList;
     }
 }
