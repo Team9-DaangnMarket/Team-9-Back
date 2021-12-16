@@ -72,6 +72,7 @@ public class PostService {
 
         Post postMain = postRepository.findById(postId).orElse(null);
 
+        assert postMain != null;
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
