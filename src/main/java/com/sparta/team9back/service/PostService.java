@@ -86,7 +86,7 @@ public class PostService {
             postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
 
-        Boolean likeCheck = postLikeRepository.existsByUserAndPost(post.getUser(), post);
+        Boolean likeCheck = postLikeRepository.existsByUserAndPost(user, post);
         postRepository.upVisitCnt(postId);
 
         return PostDetailDto.builder()
