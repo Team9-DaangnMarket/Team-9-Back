@@ -8,8 +8,8 @@ import lombok.*;
 @Setter
 @Builder
 public class PostResponseDto {
-    String username;
     String nickname;
+    String username;
     String title;
     String content;
     int price;

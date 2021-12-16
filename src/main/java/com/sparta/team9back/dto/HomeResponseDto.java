@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 public class HomeResponseDto {
+
     private Long postId;
     private String username;
     private String nickname;

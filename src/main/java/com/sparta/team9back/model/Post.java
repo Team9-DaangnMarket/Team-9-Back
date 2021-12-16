@@ -51,8 +51,6 @@ public class Post extends Timestamped {
     @JoinColumn
     private Category category;
 
-//    @Column
-//    private int visitCount;
     public void update(PostRequestDto postRequestDto, Category category) {
         this.title = postRequestDto.getTitle();
         this.content = postRequestDto.getContent();
