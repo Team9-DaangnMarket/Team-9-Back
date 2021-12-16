@@ -4,13 +4,12 @@ import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.PostLike;
 import com.sparta.team9back.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.Optional;
+import java.util.List;
+
 
 public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
     Boolean existsByUserAndPost(User user, Post post);
-
-    Optional<PostLike> findAllByUserId(User user);
-
+    List<PostLike> findAllByUser(User user);
     PostLike findByUserAndPost(User user, Post post);
 
 }

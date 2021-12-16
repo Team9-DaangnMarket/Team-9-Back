@@ -74,7 +74,6 @@ public class PostService {
 
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
 
-
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
         for (Post insidePost : postList) {
             if (postInsideDtos.size() == 4) break;
@@ -107,6 +106,7 @@ public class PostService {
                 .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
                 .likeCheck(likeCheck)
+                .postLike(post.getPostLikes())
                 .build();
 
     }

@@ -24,6 +24,7 @@ public class PostDetailDto {
     private Boolean likeCheck;
     private Integer visitCount;
     private Category category;
+    private int postLike;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
