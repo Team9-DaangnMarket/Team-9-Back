@@ -35,14 +35,14 @@ public class UserController {
                 .body(userInfoDto);
     }
     @PostMapping("/user/checkId")
-    public ResponseEntity<CheckIdResponseDto> idCheck(@RequestBody CheckIdRequestDto checkIdRequestDto) {
+    public ResponseEntity<CheckIdResponseDto> checkId(@RequestBody CheckIdRequestDto checkIdRequestDto) {
         CheckIdResponseDto checkIdResponseDto = userService.checkId(checkIdRequestDto);
 
         return ResponseEntity.ok()
                 .body(checkIdResponseDto);
     }
     @PostMapping("/user/checkNickname")
-    public ResponseEntity<CheckNicknameResponseDto> NicknameCheck(@RequestBody CheckNicknameRequestDto checkNicknameRequestDto) {
+    public ResponseEntity<CheckNicknameResponseDto> checkNickname(@RequestBody CheckNicknameRequestDto checkNicknameRequestDto) {
         CheckNicknameResponseDto checkNicknameResponseDto = userService.checkNickname(checkNicknameRequestDto);
 
         return ResponseEntity.ok()

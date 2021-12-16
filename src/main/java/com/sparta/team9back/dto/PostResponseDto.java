@@ -16,5 +16,4 @@ public class PostResponseDto {
     String goodsImg;
     boolean negoCheck;
     Category category;
-    Boolean likeCheck;
 }
