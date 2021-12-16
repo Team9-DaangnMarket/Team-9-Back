@@ -8,6 +8,7 @@ import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.repository.CategoryRepository;
+import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.validator.UserInfoValidator;
@@ -26,6 +27,7 @@ import java.util.Optional;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostLikeRepository postLikeRepository;
     private final CategoryRepository categoryRepository;
 
     @Transactional // 이걸 잊지 않았나 하는 생각.
@@ -38,12 +40,12 @@ public class PostService {
 
         Post post = Post.builder()
                 .user(user)
-                .goodsImg(postRequestDto.getGoodsImg())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
+                .price(postRequestDto.getPrice())
+                .goodsImg(postRequestDto.getGoodsImg())
                 .negoCheck(postRequestDto.getNegoCheck())
                 .category(category)
-                .price(postRequestDto.getPrice())
                 .build();
 
         postRepository.save(post);
@@ -68,8 +70,8 @@ public class PostService {
                 () -> new NullPointerException("해당 게시글 정보가 존재하지 않습니다.")
         );
 
-        Post postMain = postRepository.findByPostId(postId).orElse(null);
-        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(postMain.getUser());
+        //Post postMain = postRepository.findByPostId(postId).orElse(null);
+        List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(post.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
         for (Post insidePost : postList) {
@@ -84,19 +86,23 @@ public class PostService {
             postInsideDtos.add(new PostInsideDto(insideId, title, price, goodsImg));
         }
 
+        Boolean likeCheck = postLikeRepository.existsByUserAndPost(post.getUser(), post);
+        postRepository.upVisitCnt(postId);
+
         return PostDetailDto.builder()
                 .postId(postId)
-                .nickname(postMain.getUser().getNickname())
-                .username(postMain.getUser().getUsername())
+                .nickname(post.getUser().getNickname())
+                .username(post.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
-                //.visitCount(post.getVisitCount())
+                .visitCount(post.getVisitCount())
                 .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
+                .likeCheck(likeCheck)
                 .build();
     }
 

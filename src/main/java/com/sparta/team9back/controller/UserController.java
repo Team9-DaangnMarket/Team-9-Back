@@ -1,7 +1,6 @@
 package com.sparta.team9back.controller;
 
-import com.sparta.team9back.dto.User.SignupRequestDto;
-import com.sparta.team9back.dto.User.UserInfoDto;
+import com.sparta.team9back.dto.User.*;
 import com.sparta.team9back.model.User;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.UserService;
@@ -30,4 +29,19 @@ public class UserController {
         return ResponseEntity.ok()
                 .body(userInfoDto);
     }
+    @PostMapping("/user/checkId")
+    public ResponseEntity<CheckIdResponseDto> checkId(@RequestBody CheckIdRequestDto checkIdRequestDto) {
+        CheckIdResponseDto checkIdResponseDto = userService.checkId(checkIdRequestDto);
+
+        return ResponseEntity.ok()
+                .body(checkIdResponseDto);
+    }
+    @PostMapping("/user/checkNickname")
+    public ResponseEntity<CheckNicknameResponseDto> checkNickname(@RequestBody CheckNicknameRequestDto checkNicknameRequestDto) {
+        CheckNicknameResponseDto checkNicknameResponseDto = userService.checkNickname(checkNicknameRequestDto);
+
+        return ResponseEntity.ok()
+                .body(checkNicknameResponseDto);
+    }
+
 }

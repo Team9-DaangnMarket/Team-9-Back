@@ -21,6 +21,8 @@ public class PostDetailDto {
     private int price;
     private String goodsImg;
     private boolean negoCheck;
+    private Boolean likeCheck;
+    private Integer visitCount;
     private Category category;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
