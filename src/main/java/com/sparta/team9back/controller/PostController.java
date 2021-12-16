@@ -18,15 +18,22 @@ public class PostController {
 
     private final PostService postService;
 
-    // 게시글 작성(좋아요 미구현)
+    // 게시글 작성
     @PostMapping("/posts")
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
-       PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
-        return ResponseEntity.ok()
-                .body(postResponseDto);
-    }
+    public ResponseEntity<String> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        postService.createPost(postRequestDto, userDetails.getUser());
 
-    // 상세 게시글 보기(좋아요 미구현)
+        return ResponseEntity.ok()
+                .body("게시글작성 완료");
+    }
+//    @PostMapping("/posts")
+//    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+//       PostResponseDto postResponseDto =  postService.createPost(postRequestDto, userDetails.getUser());
+//        return ResponseEntity.ok()
+//                .body(postResponseDto);
+//    }
+
+    // 상세 게시글 보기
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
@@ -34,7 +41,7 @@ public class PostController {
                .body(postDetailDto);
     }
 
-    // 게시글 수정(좋아요 미구현)
+    // 게시글 수정
     @PutMapping("/posts/{postId}")
     public void updatePost(@PathVariable Long postId, @RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         postService.updatePost(postId, postRequestDto, userDetails.getUser());
@@ -46,6 +53,7 @@ public class PostController {
         postService.deletePost(postId, userDetails);
     }
 
+    // 카테고리 리스트 넘겨주기(String [])
     @GetMapping("/posts/category")
     public List<String> setCategory(){
         return postService.setCategory();

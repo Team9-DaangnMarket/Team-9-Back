@@ -14,17 +14,15 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository <Post, Long>{
     Optional<Post> findByUserAndPostId(User user, Long postId);
-
     Optional<Post> findByPostId(Long postId);
 
     List<Post> findAllByUserOrderByPostIdDesc(User user);
+    List<Post> findAllByOrderByModifiedAtDesc();
+    List<Post> findAllByOrderByPostIdDesc();
 
     Page<Post> findAllByOrderByPostIdDesc(Pageable pageable);
     Page<Post> findAllByOrderByModifiedAtDesc(Pageable pageable);
-    Optional<Post> findByPostId(Long postId);
-    List<Post> findAllByOrderByModifiedAtDesc();
 
-    List<Post> findAllByOrderByPostIdDesc();
 
     @Modifying
     @Query("update Post a set a.postLikes = a.postLikes + 1 where a.postId = :id")

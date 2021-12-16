@@ -103,6 +103,7 @@ public class PostService {
                 .createdAt(post.getCreatedAt())
                 .insideList(postInsideDtos)
                 .likeCheck(likeCheck)
+                .postLike(post.getPostLikes())
                 .build();
     }
 
