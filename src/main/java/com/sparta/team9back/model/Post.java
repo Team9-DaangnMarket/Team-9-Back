@@ -65,7 +65,7 @@ public class Post extends Timestamped {
 
     @PrePersist
     public void prePersist() {
-        this.visitCount = this.visitCount == null ? 0 : this.visitCount;
+        this.visitCount = this.visitCount == null ? 1 : this.visitCount;
     }
 
 }

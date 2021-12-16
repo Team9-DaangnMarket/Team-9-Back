@@ -53,7 +53,7 @@ public class PostService {
                 .username(user.getUsername())
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
-                .category(category)
+                .categoryName(category.getCategoryName())
                 .goodsImg(postRequestDto.getGoodsImg())
                 .price(postRequestDto.getPrice())
                 .negoCheck(postRequestDto.getNegoCheck())
@@ -95,7 +95,7 @@ public class PostService {
                 .username(postMain.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .category(post.getCategory())
+                .categoryName(post.getCategory().getCategoryName())
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
@@ -105,7 +105,6 @@ public class PostService {
                 .likeCheck(likeCheck)
                 .postLike(post.getPostLikes())
                 .build();
-
     }
 
     @Transactional

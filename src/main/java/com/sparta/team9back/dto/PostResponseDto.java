@@ -15,5 +15,5 @@ public class PostResponseDto {
     int price;
     String goodsImg;
     boolean negoCheck;
-    Category category;
+    String categoryName;
 }

@@ -37,7 +37,6 @@ public class MyDetailService {
                     .postLikes(post.getPostLikes())
                     .build();
             myPostLikeResponseDto.add(responseDto);
-
         }
         return myPostLikeResponseDto;
     }
