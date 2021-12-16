@@ -34,7 +34,9 @@ public class PostService {
     public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
 
         String categoryName = postRequestDto.getCategoryName();
-        Category category = categoryRepository.findByCategoryName(categoryName).orElse(null);
+        Category category= categoryRepository.findByCategoryName(categoryName).orElseThrow(
+                () -> new NullPointerException("해당 카테고리명이 존재하지 않습니다.")
+        );
 
         Post post = Post.builder()
                 .user(user)
@@ -64,10 +66,9 @@ public class PostService {
     @Transactional      //리스트로 보내기
     public PostDetailDto showDetail(Long postId, User user) {
 
-        Post post = postRepository.findById(postId).orElse(null);
-        if (post == null) {
-            throw new NullPointerException("해당 게시글 정보가 존재하지 않습니다.");
-        }
+        Post post = postRepository.findById(postId).orElseThrow(
+                () -> new NullPointerException("해당 게시글 정보가 존재하지 않습니다.")
+        );
 
         Post postMain = postRepository.findById(postId).orElse(null);
 
@@ -109,11 +110,12 @@ public class PostService {
     @Transactional
     public void updatePost(Long postId, PostRequestDto postRequestDto, User user) {
         Post post = postRepository.findByUserAndPostId(user, postId).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다.")
+                () -> new NullPointerException("해당 게시글이 존재하지 않습니다.")
         );
 
-        String categoryName = postRequestDto.getCategoryName();
-        Category category= categoryRepository.findByCategoryName(categoryName).orElse(null);
+        Category category= categoryRepository.findByCategoryName(postRequestDto.getCategoryName()).orElseThrow(
+                () -> new NullPointerException("해당 카테고리명이 존재하지 않습니다.")
+        );
 
         post.update(postRequestDto, category);
     }
