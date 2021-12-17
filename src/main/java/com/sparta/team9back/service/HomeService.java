@@ -6,10 +6,7 @@ import com.sparta.team9back.repository.PostRepository;
 import com.sparta.team9back.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.support.PagedListHolder;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +21,8 @@ public class HomeService {
     private final UserRepository userRepository;
 
     @Transactional
-    public List<HomeResponseDto> findAllPosts(Pageable pageable) {
-        List<Post> posts = postRepository.findAllByOrderByPostIdDesc(pageable).getContent();
+    public List<HomeResponseDto> findAllPosts(Pageable sortedByPostIdDesc) {
+        List<Post> posts = postRepository.findAll(sortedByPostIdDesc).getContent();
         List<HomeResponseDto> allPosts = new ArrayList<>();
         for (Post post : posts) {
             HomeResponseDto responseDto = createPostDto(post);
@@ -66,15 +63,17 @@ public class HomeService {
             HomeResponseDto responseDto = createPostDto(post);
             searchedPosts.add(responseDto);
         }
-
         return searchedPosts;
     }
 
-//    public Page<Post> seeOwnPosts(Long userId, int page, int size, String sortBy, boolean isAsc) {
-//        Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
-//        Sort sort = Sort.by(direction, sortBy);
-//        Pageable pageable = PageRequest.of(page, size, sort);
-//
-//        return postRepository.findAllByUserId(userId, pageable);
-//    }
+    public List<HomeResponseDto> seeOwnPosts(Pageable sortByUrl, Long userId) {
+        List<Post> ownList = postRepository.findAllByUserId(userId, sortByUrl).getContent();
+
+        List<HomeResponseDto> pagedOwnList = new ArrayList<>();
+        for (Post post : ownList) {
+            HomeResponseDto responseDto = createPostDto(post);
+            pagedOwnList.add(responseDto);
+        }
+        return pagedOwnList;
+    }
 }

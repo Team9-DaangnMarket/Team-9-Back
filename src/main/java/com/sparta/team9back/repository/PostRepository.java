@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.net.ContentHandler;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,10 @@ public interface PostRepository extends JpaRepository <Post, Long>{
 
     List<Post> findAllByUserOrderByPostIdDesc(User user);
     List<Post> findAllByOrderByModifiedAtDesc();
+
     List<Post> findAllByOrderByPostIdDesc();
 
+    Page<Post> findAllByOrderByPostIdAsc(Pageable sortedByPostIdDesc);
     Page<Post> findAllByOrderByPostIdDesc(Pageable pageable);
     Page<Post> findAllByOrderByModifiedAtDesc(Pageable pageable);
     Page<Post> findAllByUserId(Long userId, Pageable pageable);
@@ -35,5 +38,4 @@ public interface PostRepository extends JpaRepository <Post, Long>{
     @Modifying
     @Query("update Post a set a.visitCount = a.visitCount + 1 where a.postId = :id")
     void upVisitCnt(Long id);
-
 }

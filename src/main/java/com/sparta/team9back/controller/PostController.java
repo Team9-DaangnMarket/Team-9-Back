@@ -2,7 +2,6 @@ package com.sparta.team9back.controller;
 
 import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostRequestDto;
-import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.PostService;
 import lombok.RequiredArgsConstructor;

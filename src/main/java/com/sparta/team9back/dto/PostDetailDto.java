@@ -1,7 +1,6 @@
 package com.sparta.team9back.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sparta.team9back.model.Category;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,7 +27,6 @@ public class PostDetailDto {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-
 
     private List<PostInsideDto> insideList;
 }

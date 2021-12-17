@@ -1,12 +1,9 @@
 package com.sparta.team9back.controller;
 
 import com.sparta.team9back.dto.HomeResponseDto;
-import com.sparta.team9back.dto.PostResponseDto;
-import com.sparta.team9back.model.Post;
 import com.sparta.team9back.security.UserDetailsImpl;
 import com.sparta.team9back.service.HomeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -36,16 +33,17 @@ public class HomeController {
         return homeService.searchPosts(keyword, page, size);
     }
 
-//    @GetMapping("/experiments") // 성공하면 /myposts로 바꾸기?
-//    public Page<Post> seeOwnPosts(
-//            @RequestParam("page") int page,
-//            @RequestParam("size") int size,
-//            @RequestParam("sortBy") String sortBy,
-//            @RequestParam("isAsc") boolean isAsc,
-//            @AuthenticationPrincipal UserDetailsImpl userDetails
-//            ) {
-//        Long userId = userDetails.getUser().getId();
-//        page = page-1;
-//        return homeService.seeOwnPosts(userId, page, size, sortBy, isAsc);
-//    }
+    // 내가 쓴 게시글 보여주기(정렬 기능 있음)
+    @GetMapping("/experiments")
+    public List<HomeResponseDto> seeOwnPosts(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("direction") Sort.Direction direction,
+            @RequestParam("properties") String properties,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Pageable sortByUrl = PageRequest.of(page, size, Sort.by(direction, properties));
+        Long userId = userDetails.getUser().getId();
+        // direction -> enum : ASC / DESC
+        return homeService.seeOwnPosts(sortByUrl, userId);
+    }
 }

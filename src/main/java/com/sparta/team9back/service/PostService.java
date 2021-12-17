@@ -3,7 +3,6 @@ package com.sparta.team9back.service;
 import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostInsideDto;
 import com.sparta.team9back.dto.PostRequestDto;
-import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
@@ -31,7 +30,7 @@ public class PostService {
     private final CategoryRepository categoryRepository;
 
     @Transactional // 이걸 잊지 않았나 하는 생각.
-    public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
+    public void createPost(PostRequestDto postRequestDto, User user) {
 
         String categoryName = postRequestDto.getCategoryName();
         Category category= categoryRepository.findByCategoryName(categoryName).orElseThrow(
@@ -49,18 +48,6 @@ public class PostService {
                 .build();
 
         postRepository.save(post);
-
-        return PostResponseDto.builder()
-
-                .nickname(user.getNickname())
-                .username(user.getUsername())
-                .title(postRequestDto.getTitle())
-                .content(postRequestDto.getContent())
-                .categoryName(category.getCategoryName())
-                .goodsImg(postRequestDto.getGoodsImg())
-                .price(postRequestDto.getPrice())
-                .negoCheck(postRequestDto.getNegoCheck())
-                .build();
     }
 
     @Transactional      //리스트로 보내기
@@ -139,7 +126,7 @@ public class PostService {
 
         List<String> categoryList = new ArrayList<>();
         List<Category> categories = categoryRepository.findAll();
-        for (Category category :categories) {
+        for (Category category : categories) {
             categoryList.add(category.getCategoryName());
         }
         return categoryList;
