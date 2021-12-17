@@ -94,11 +94,10 @@
  * Spring Security
  * Gradle
  * JPA
- * QureyDSL
  * MySQL
  * JWT
  * CORS
- * Lombok
+
 
 <code> Front-end </code>
 * [Front-end 개발Page](https://github.com/Team9-DaangnMarket/Team-9-Front)
