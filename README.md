@@ -86,8 +86,8 @@
 
 
 
+<img width="866" alt="스크린샷 2021-12-09 오후 2 32 42" src="https://user-images.githubusercontent.com/90129613/146481690-f768fe7d-59b7-44fe-92c6-4311e3e2a436.png">
 
-<img width="866" alt="스크린샷 2021-12-09 오후 2 32 42" src="https://user-images.githubusercontent.com/90129613/146481261-f9dc28c6-c41c-4707-98d8-091e4661d154.png">
 
 
 <code> Back-end </code>
