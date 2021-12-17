@@ -85,7 +85,8 @@
 ## 🔨사용한 기술 스택
 
 
-<img width="866" alt="스크린샷 2021-12-09 오후 2 32 42" src="https://user-images.githubusercontent.com/90129613/146349023-4e3f2cc5-2998-4080-b94b-c24636e45cc7.png">
+
+<img width="866" alt="스크린샷 2021-12-09 오후 2 32 42" src="https://user-images.githubusercontent.com/90129613/146480107-8c111f5b-c954-4c1b-98d6-e260d88a8b5c.png">
 
 
 <code> Back-end </code>
