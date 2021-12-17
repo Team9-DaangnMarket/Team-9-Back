@@ -114,6 +114,8 @@
 * Git
 * GitHub
 * Notion
+* Figma
+* Postman
 
 ## ⚒️ ERD 설계
 
