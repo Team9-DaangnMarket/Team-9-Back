@@ -3,11 +3,9 @@ package com.sparta.team9back.service;
 import com.sparta.team9back.dto.PostDetailDto;
 import com.sparta.team9back.dto.PostInsideDto;
 import com.sparta.team9back.dto.PostRequestDto;
-import com.sparta.team9back.dto.PostResponseDto;
 import com.sparta.team9back.model.Category;
 import com.sparta.team9back.model.Post;
 import com.sparta.team9back.model.User;
-import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.CategoryRepository;
 import com.sparta.team9back.repository.PostLikeRepository;
 import com.sparta.team9back.repository.PostRepository;
@@ -22,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -30,9 +29,8 @@ public class PostService {
     private final PostLikeRepository postLikeRepository;
     private final CategoryRepository categoryRepository;
 
-
-    @Transactional
-    public PostResponseDto createPost(PostRequestDto postRequestDto, User user) {
+    @Transactional // 이걸 잊지 않았나 하는 생각.
+    public void createPost(PostRequestDto postRequestDto, User user) {
 
         String categoryName = postRequestDto.getCategoryName();
         Category category= categoryRepository.findByCategoryName(categoryName).orElseThrow(
@@ -50,18 +48,6 @@ public class PostService {
                 .build();
 
         postRepository.save(post);
-
-        return PostResponseDto.builder()
-
-                .nickname(user.getNickname())
-                .username(user.getUsername())
-                .title(postRequestDto.getTitle())
-                .content(postRequestDto.getContent())
-                .category(category)
-                .goodsImg(postRequestDto.getGoodsImg())
-                .price(postRequestDto.getPrice())
-                .negoCheck(postRequestDto.getNegoCheck())
-                .build();
     }
 
     @Transactional      //리스트로 보내기
@@ -71,6 +57,7 @@ public class PostService {
                 () -> new NullPointerException("해당 게시글 정보가 존재하지 않습니다.")
         );
 
+        //Post postMain = postRepository.findByPostId(postId).orElse(null);
         List<Post> postList = postRepository.findAllByUserOrderByPostIdDesc(post.getUser());
 
         List<PostInsideDto> postInsideDtos = new ArrayList<>();
@@ -95,7 +82,7 @@ public class PostService {
                 .username(post.getUser().getUsername())
                 .title(post.getTitle())
                 .content(post.getContent())
-                .category(post.getCategory())
+                .categoryName(post.getCategory().getCategoryName())
                 .goodsImg(post.getGoodsImg())
                 .price(post.getPrice())
                 .negoCheck(post.getNegoCheck())
@@ -105,7 +92,6 @@ public class PostService {
                 .likeCheck(likeCheck)
                 .postLike(post.getPostLikes())
                 .build();
-
     }
 
     @Transactional
@@ -133,5 +119,16 @@ public class PostService {
             throw new IllegalArgumentException("당신의 게시글이 아닙니다.");
         }
         postRepository.deleteById(postId);
+    }
+
+    @Transactional
+    public List<String> setCategory(){
+
+        List<String> categoryList = new ArrayList<>();
+        List<Category> categories = categoryRepository.findAll();
+        for (Category category : categories) {
+            categoryList.add(category.getCategoryName());
+        }
+        return categoryList;
     }
 }

@@ -16,9 +16,6 @@ public class PostLikeController {
 
     @PostMapping("/postLike/{postId}")
     public void clickPostLike(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable Long postId) {
-//        if(userDetails == null) {
-//            throw new IllegalArgumentException("회원가입 후 이용해주세요");
-//        }
         postLikeService.clickPostLike(userDetails.getUser(), postId);
     }
 

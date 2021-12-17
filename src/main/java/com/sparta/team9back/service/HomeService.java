@@ -21,8 +21,8 @@ public class HomeService {
     private final UserRepository userRepository;
 
     @Transactional
-    public List<HomeResponseDto> findAllPosts(Pageable pageable) {
-        List<Post> posts = postRepository.findAllByOrderByPostIdDesc(pageable).getContent();
+    public List<HomeResponseDto> findAllPosts(Pageable sortedByPostIdDesc) {
+        List<Post> posts = postRepository.findAll(sortedByPostIdDesc).getContent();
         List<HomeResponseDto> allPosts = new ArrayList<>();
         for (Post post : posts) {
             HomeResponseDto responseDto = createPostDto(post);
@@ -63,7 +63,17 @@ public class HomeService {
             HomeResponseDto responseDto = createPostDto(post);
             searchedPosts.add(responseDto);
         }
-
         return searchedPosts;
+    }
+
+    public List<HomeResponseDto> seeOwnPosts(Pageable sortByUrl, Long userId) {
+        List<Post> ownList = postRepository.findAllByUserId(userId, sortByUrl).getContent();
+
+        List<HomeResponseDto> pagedOwnList = new ArrayList<>();
+        for (Post post : ownList) {
+            HomeResponseDto responseDto = createPostDto(post);
+            pagedOwnList.add(responseDto);
+        }
+        return pagedOwnList;
     }
 }
