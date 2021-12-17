@@ -32,6 +32,7 @@ public class JwtTokenUtils {
                     // 토큰 만료 일시 = 현재 시간 + 토큰 유효기간)
                     .withClaim(CLAIM_EXPIRED_DATE, new Date(System.currentTimeMillis() + JWT_TOKEN_VALID_MILLI_SEC))
                     .sign(generateAlgorithm());
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -39,7 +40,8 @@ public class JwtTokenUtils {
         return token;
     }
 
-    private static com.auth0.jwt.algorithms.Algorithm generateAlgorithm() {
+    private static com.auth0.jwt.algorithms.Algorithm generateAlgorithm() { //?? 이거 왜 생성?
+                                                                            //리턴값만 바로 위에 주입
         return Algorithm.HMAC256(JWT_SECRET);
     }
 }

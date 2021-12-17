@@ -2,6 +2,7 @@ package com.sparta.team9back.model;
 
 import com.sparta.team9back.dto.User.SignupRequestDto;
 import com.sparta.team9back.validator.UserInfoValidator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends Timestamped {
 
     @Id

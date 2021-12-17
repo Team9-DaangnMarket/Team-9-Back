@@ -1,11 +1,13 @@
 package com.sparta.team9back.dto.User;
 
-import lombok.Builder;
-import lombok.Getter;
+import jdk.jfr.StackTrace;
+import lombok.*;
 
 
 @Getter
+@Setter
 @Builder
+@AllArgsConstructor
 public class SignupRequestDto {
     private String username;
     private String password;
