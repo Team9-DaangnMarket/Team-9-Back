@@ -90,33 +90,37 @@
 
 
 
-<code> Back-end </code>
- * Java 8
- * SpringBoot 2.5.3
- * Spring Security
- * Gradle
- * JPA
- * MySQL
- * JWT
- * CORS
+<code> Back-end </code> 
+</br>
+<p align="center"float="left">
+<img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white">
+<img src="https://img.shields.io/badge/SpringSecurity-6DB33F?style=for-the-badge&logo=Spring&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
+ </br>
+<img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white"> 
+<img src="https://img.shields.io/badge/JWT-232F3E?style=for-the-badge&logo=Jwt&logoColor=white"> 
+<img src="https://img.shields.io/badge/CORS-231F20?style=for-the-badge&logo=Cors&logoColor=white"> 
+<img src="https://img.shields.io/badge/FileZilla-BF0000?style=for-the-badge&logo=FileZilla&logoColor=white"> 
+</p>
 
 
 <code> Front-end </code>
+</br>
 * [Front-end 개발Page](https://github.com/Team9-DaangnMarket/Team-9-Front)
 
-</br>
-
-<code>DevOps</code>
-* AWS EC2
-* AWS RDS(MySQL)
-* FileZilla
 
 <code>Tool</code>
-* Git
-* GitHub
-* Notion
-* Figma
-* Postman
+</br>
+
+<p align="center"float="left">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+  <img src="https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white">
+  <img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white">
+</p>
 
 ## ⚒️ ERD 설계
 
