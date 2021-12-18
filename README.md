@@ -24,8 +24,9 @@
 </p>
 
 ## 🎥 시연 영상
-<!--  [![Hnet-image](https://user-images.githubusercontent.com/90129613/145665770-a2eb072f-3148-4e3b-afd9-0f9a8105c322.gif)](https://www.youtube.com/watch?v=n08_pEMKvvQ)<br> -->
-유투브 편집자 구합니다.
+
+ [![Hnet-image](https://user-images.githubusercontent.com/90129613/146632165-e49202dd-2cd4-46a0-9319-b84c14503bcc.gif)](https://www.youtube.com/watch?v=5MS9VAZ-YYA)<br>
+이미지를 클릭하시면 유튜브 영상으로 이동됩니다.
 
 ## 🧑🏼‍💻 개발기간 및 팀원소개
 ### 기간: 2021.12.13 ~ 2021.12.18 (6일)  
