@@ -8,11 +8,11 @@
 
 ## 🤷 프로젝트 소개 
  <p> 당근마켓 클론 코딩입니다. </p>
- <p> 맛깔나게 소개글을 작성해주실 팀원 구합니다. </p>
+ <p> </p>
  <p> </p>
  <p> </p>
   
-  Web Site : 아직 웹사이트 개시를 안했습니다.
+  Web Site : http://team9danguen.s3-website.ap-northeast-2.amazonaws.com/
 </br>
 
 ## 🧾 와이어 프레임
@@ -140,7 +140,7 @@
 
 <code>성해인</code> 메인화면, 게시글 작성 & 수정 & 삭제 , 상세 게시글 조회, 검색
 
-<!-- <code>Trouble Shooting</code>  [트러블 슈팅 해결과정](https://chrome-armadillo-b80.notion.site/0c1dc754030248d88bf14c7d8570ddab) -->
+<code>Trouble Shooting</code>  [트러블 슈팅 해결과정](https://exuberant-dart-a7f.notion.site/007d3785d2d645a28853523fe295256c)
 
 </br>
 
@@ -152,7 +152,7 @@
 </br>
 
 <code>백정수</code> 
-</br>
+</br> 처음엔 비전공자만 모여있어서 불안감이 많았습니다. 하지만 첫날부터 오류가 나는 부분을 차근차근 수정해나가면서 
 
 
 <code>성해인</code>  
