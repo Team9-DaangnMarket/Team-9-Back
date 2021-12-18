@@ -24,6 +24,7 @@ public class PostDetailDto {
     private Integer visitCount;
     private String categoryName;
     private int postLike;
+    private String profileImg;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
