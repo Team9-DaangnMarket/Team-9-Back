@@ -91,6 +91,7 @@ public class PostService {
                 .insideList(postInsideDtos)
                 .likeCheck(likeCheck)
                 .postLike(post.getPostLikes())
+                .profileImg(post.getUser().getProfileImg())
                 .build();
     }
 
