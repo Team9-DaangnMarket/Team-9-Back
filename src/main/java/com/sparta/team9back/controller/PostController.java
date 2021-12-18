@@ -36,6 +36,7 @@ public class PostController {
     @GetMapping("/posts/{postId}")
     public ResponseEntity<PostDetailDto> showDetail(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         PostDetailDto postDetailDto = postService.showDetail(postId, userDetails.getUser());
+
        return ResponseEntity.ok()
                .body(postDetailDto);
     }
